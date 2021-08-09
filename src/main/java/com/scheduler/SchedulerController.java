@@ -18,12 +18,18 @@ public class SchedulerController {
     }
 
     @PostMapping("/addUser")
-    public String addUser(@RequestParam String first, @RequestParam String last) {
+    public String addUser(@RequestParam String first, @RequestParam String last, @RequestParam String password,
+                          @RequestParam String email, @RequestParam String phone) {
+        if (first == "" || last == "" || password == "" || email == "" || phone == "")
+            return "Vyplňte prosím všechna pole.";
         User user = new User();
         user.setFirstName(first);
         user.setLastName(last);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setPhone(phone);
         userRepository.save(user);
-        return "Added new user to repo!";
+        return "Registrace proběhla úspěšně.";
     }
 
     @GetMapping("/list")
@@ -36,17 +42,12 @@ public class SchedulerController {
         return userRepository.findUserById(id);
     }
 
-    @GetMapping("/hello")
-    public String sayHello(@RequestParam(value = "myName", defaultValue = "World") String name) {
-        return String.format("Hello %s!", name);
-    }
-
     @PostMapping("/addEvent")
     public String addEvent(@RequestParam String name, @RequestParam String description) {
         Event event = new Event();
         event.setName(name);
         event.setDescription(description);
         eventRepository.save(event);
-        return "Added new event to repo!";
+        return "Nová událost vytvořena, přidejte termíny a místa";
     }
 }

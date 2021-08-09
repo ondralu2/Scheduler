@@ -9,23 +9,45 @@
     <a href="/">
         <img src="/img/logo.png" alt="clock">
     </a>
+    <div class="divLeft">
+        <a href="newEvent.html">Vytvořit novou událost</a>
+    </div>
+    <div class="divLeft">
+        <a href="userEvents.html">Moje události</a>
+    </div>
+    <div class="divRight">
+        <a href="newUser.html">Registrace</a>
+    </div>
+    <div class="divRight">
+        <a href="logIn.html">Přihlášení</a>
+    </div>
+    <div class="divRight">
+        <a href="logOut.html">Odhlášení</a>
+    </div>
     <form action="/addUser" method="POST">
-        <div class="divLeft">
-            <a href="newEvent.html">Vytvořit novou událost</a>
-        </div>
         <div class="divClear">
-            <p>Let's add a customer.</p>
-
             <div>
-                <label for="firstName">First name:</label>
-                <input name="first" id="firstName" value="Lukáš">
+                <label for="firstName">Křestní jméno:</label>
+                <input name="first" id="firstName">
             </div>
             <div>
-                <label for="lastName">Last name:</label>
-                <input name="last" id="lastName" value="Ondráček">
+                <label for="lastName">Příjmení:</label>
+                <input name="last" id="lastName">
             </div>
             <div>
-                <button>Add customer</button>
+                <label for="password">Heslo:</label>
+                <input name="password" id="password">
+            </div>
+            <div>
+                <label for="email">E-mail:</label>
+                <input name="email" id="email">
+            </div>
+            <div>
+                <label for="phone">Telefon:</label>
+                <input name="phone" id="phone">
+            </div>
+            <div>
+                <button>Zaregistrovat se</button>
             </div>
         </div>
     </form>

@@ -18,10 +18,12 @@ div {
 
 .divLeft {
     float: left;
+    margin-right: 10px;
 }
 
 .divRight {
     float: right;
+    margin-left: 10px;
 }
 
 .divClear {
