@@ -12,22 +12,19 @@
     <thead>
     <tr>
       <td>ID</td>
-      <td>Křestní jméno</td>
-      <td>Příjmení</td>
-      <td>E-mail</td>
-      <td>Telefon</td>
+      <td>Jméno</td>
+      <td>Popis</td>
     </tr>
     </thead>
     <tbody>
     <tr th:if="${message.empty}">
       <td colspan="4">Žádný záznam</td>
     </tr>
-    <tr th:each="user: ${message}">
-      <td th:text="${user.id}" />
-      <td th:text="${user.firstName}" />
-      <td th:text="${user.lastName}" />
-      <td th:text="${user.email}" />
-      <td th:text="${user.phone}" />
+    <tr th:each="element: ${message}">
+      <td th:text="${element.id}" />
+      <td th:text="${element.name}" />
+      <td th:text="${element.description}" />
+
     </tr>
     </tbody>
   </table>

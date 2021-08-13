@@ -80,6 +80,12 @@ public class SchedulerController {
         return "message";
     }
 
+    @GetMapping("/userEvents")
+    public String userEvents(Model model) {
+        model.addAttribute("message", eventRepository.findAll());
+        return "table";
+    }
+
     @GetMapping("/logIn")
     public String logIn(Model model) {
         return "logIn";
