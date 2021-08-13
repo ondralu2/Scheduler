@@ -7,8 +7,20 @@
 </head>
 <body>
 <div th:insert="fragments/header :: header">...</div>
-<h1>Scheduler - Naplánujte si setkání</h1>
-<a href="list">Seznam uživatelů</a>
+<h1>Přihlášení</h1>
+<form action="/login" method="POST">
+    <div>
+        <label for="email">E-mail:</label>
+        <input name="email" id="email">
+    </div>
+    <div>
+        <label for="password">Heslo:</label>
+        <input name="password" id="password">
+    </div>
+    <div>
+        <button>Přihlásit se</button>
+    </div>
+</form>
 <div th:insert="fragments/footer :: footer">...</div>
 </body>
 </html>

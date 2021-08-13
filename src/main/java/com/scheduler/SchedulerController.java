@@ -4,13 +4,9 @@ import com.scheduler.model.User;
 import com.scheduler.model.Event;
 import com.scheduler.repository.UserRepository;
 import com.scheduler.repository.EventRepository;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Controller
 public class SchedulerController {
@@ -41,13 +37,13 @@ public class SchedulerController {
 
         model.addAttribute("message", name);
 
-        return "main"; //view
+        return "main";
     }
 
     @PostMapping("/addUser")
     public String addUser(@RequestParam String first, @RequestParam String last, @RequestParam String password,
                           @RequestParam String email, @RequestParam String phone, Model model) {
-        if (first == "" || last == "" || password == "" || email == "" || phone == "") {
+        if (first.equals("") || last.equals("") || password.equals("") || email.equals("") || phone.equals("")) {
             model.addAttribute("message", "Vyplňte prosím všechna pole.");
             return "message";
         }
@@ -69,11 +65,6 @@ public class SchedulerController {
         return "table";
     }
 
-    @GetMapping("/find/{id}")
-    public User findUserById(@PathVariable Integer id) {
-        return userRepository.findUserById(id);
-    }
-
     @GetMapping("/newEvent")
     public String newEvent(Model model) {
         return "newEvent";
@@ -86,6 +77,30 @@ public class SchedulerController {
         event.setDescription(description);
         eventRepository.save(event);
         model.addAttribute("message", "Nová událost vytvořena, přidejte termíny a místa.");
+        return "message";
+    }
+
+    @GetMapping("/logIn")
+    public String logIn(Model model) {
+        return "logIn";
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestParam String email, @RequestParam String password, Model model) {
+        User user = userRepository.findUserByEmail(email);
+        if (user == null){
+            model.addAttribute("message", "Přihlášení se nezdařilo - zadaný e-mail je špatně.");
+        }
+        else if (user.getPassword().equals(password))
+            model.addAttribute("message", "Přihlášení proběhlo úspěšně.");
+        else
+            model.addAttribute("message", "Přihlášení se nezdařilo - zadané heslo je špatně.");
+        return "message";
+    }
+
+    @GetMapping("/logOut")
+    public String logOut(Model model) {
+        model.addAttribute("message", "Uživatel odhlášen.");
         return "message";
     }
 }
