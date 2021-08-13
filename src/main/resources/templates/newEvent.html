@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="cs" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="css/styles.css">
     <meta charset="UTF-8">
-    <title>Přidat událost</title>
+    <title>Scheduler - Naplánujte si setkání</title>
 </head>
 <body>
+<div th:insert="fragments/header :: header">...</div>
+<h1>Vytvoření nové události</h1>
 <form action="/addEvent" method="POST">
-    <h1>Vytvoření nové události</h1>
-
     <div>
         <label for="name">Název události:</label>
         <input name="name" id="name">
@@ -20,5 +21,6 @@
         <button>Přidat událost</button>
     </div>
 </form>
+<div th:insert="fragments/footer :: footer">...</div>
 </body>
 </html>
