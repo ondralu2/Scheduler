@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:replace="fragments.html :: css-primary">
+    <link th:replace="fragments.html :: css-secondary">
+    <link th:replace="fragments.html :: font">
+    <title>Naplánujte si setkání</title>
+</head>
+<body>
+<div th:replace="fragments.html :: header"></div>
+<!-- !PAGE CONTENT! -->
+<div class="w3-main main-margin">
+    <div class="w3-container container-margin"id="showcase">
+        <h1 class="w3-jumbo"><b>Naplánujte si setkání.</b></h1>
+        <h1 class="w3-xxxlarge w3-text-red"><b>Kdykoliv, kdekoliv, s kýmkoliv.</b></h1>
+        <hr class="hr-red w3-round">
+    </div>
+<!-- End page content -->
+</div>
+<div th:replace="fragments.html :: footer"></div>
+<script th:replace="fragments.html :: script"></script>
+</body>
+</html>

@@ -2,13 +2,12 @@ package com.project.scheduler.web;
 
 import com.project.scheduler.entity.User;
 import com.project.scheduler.services.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@RestController
+@Controller
 public class UserController {
     private final UserService service;
 
@@ -18,6 +17,11 @@ public class UserController {
         s.setFirstName("Lukáš");
         s.setLastName("Ondráček");
         service.save(s);
+    }
+
+    @RequestMapping("/")
+    public String showIndex(){
+        return "index";
     }
 
     @GetMapping("/user/{id}")
