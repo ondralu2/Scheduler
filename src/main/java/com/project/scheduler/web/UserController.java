@@ -24,6 +24,16 @@ public class UserController {
         return "index";
     }
 
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
+
+    @RequestMapping("/welcome")
+    public String welcome(){
+        return "welcome";
+    }
+
     @GetMapping("/user/{id}")
     public Optional<User> getUser(@PathVariable long id) {
         // get User from DB (via application logic) and return it in JSON

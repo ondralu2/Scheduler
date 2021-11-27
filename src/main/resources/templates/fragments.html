@@ -14,11 +14,13 @@
             <h3 class="w3-padding-64"><b><a href="/" class="text-decoration-none">Scheduler</a></b></h3>
         </div>
         <div class="w3-bar-block">
-            <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Vytvořit novou událost</a>
-            <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Moje události</a>
-            <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Registrace</a>
-            <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Přihlášení</a>
-            <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Odhlášení</a>
+            <a href="/create-event" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" th:if="${#httpServletRequest.remoteUser != null}">Vytvořit novou událost</a>
+            <a href="/events" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" th:if="${#httpServletRequest.remoteUser != null}">Moje události</a>
+            <a href="/register" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" th:if="${#httpServletRequest.remoteUser == null}">Registrace</a>
+            <a href="/welcome" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" th:if="${#httpServletRequest.remoteUser == null}">Přihlášení</a>
+            <form th:action="@{/logout}" method="post" onclick="w3_close()" th:if="${#httpServletRequest.remoteUser != null}">
+                <input type="submit" class="w3-bar-item w3-button w3-hover-white" value="Odhlášení"/>
+            </form>
         </div>
     </nav>
 
@@ -30,9 +32,17 @@
 
     <!-- Overlay effect when opening sidebar on small screens -->
     <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+    <div class="w3-main main-margin">
+        <div class="container-margin" th:fragment="label">
+            <h1 class="w3-jumbo"><b>Naplánujte si setkání.</b></h1>
+            <h1 class="w3-xxxlarge w3-text-red"><b>Kdykoliv, kdekoliv, s kýmkoliv.</b></h1>
+            <hr class="hr-red w3-round">
+        </div>
+    </div>
 </div>
-<div lass="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px" th:fragment="footer">
-    <p class="w3-right">&copy;2021 Lukáš Ondráček</p>
+<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px" th:fragment="footer">
+    <p class="w3-right">&copy;2021 Lukáš Ondráček (ondralu2)</p>
 </div>
 <script th:fragment="script">
 // Script to open and close sidebar
@@ -44,14 +54,6 @@ function w3_open() {
 function w3_close() {
   document.getElementById("mySidebar").style.display = "none";
   document.getElementById("myOverlay").style.display = "none";
-}
-
-// Modal Image Gallery
-function onClick(element) {
-  document.getElementById("img01").src = element.src;
-  document.getElementById("modal01").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
 }
 </script>
 
