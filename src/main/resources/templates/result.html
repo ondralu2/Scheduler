@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:replace="fragments.html :: css-primary">
+    <link th:replace="fragments.html :: css-secondary">
+    <link th:replace="fragments.html :: font">
+    <title>Naplánujte si setkání</title>
+</head>
+<body>
+<div th:replace="fragments.html :: header"></div>
+<!-- PAGE CONTENT -->
+<div class="w3-main main-margin">
+    <p th:text="'ID: ' + ${user.id}" />
+    <p th:text="'Username: ' + ${user.username}" />
+<!-- End of PAGE CONTENT -->
+</div>
+<div th:replace="fragments.html :: footer"></div>
+<script th:replace="fragments.html :: script"></script>
+</body>
+</html>
