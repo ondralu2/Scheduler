@@ -49,7 +49,7 @@ public class UserController {
     public String registerSubmit(@ModelAttribute User user, Model model){
         model.addAttribute("user", user);
         service.save(user);
-        return "result";
+        return "registered";
     }
 
     @GetMapping("/user/{id}")
