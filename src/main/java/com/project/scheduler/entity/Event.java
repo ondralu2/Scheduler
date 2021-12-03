@@ -18,6 +18,10 @@ public class Event {
     private User author;
     @ManyToMany
     private Set<User> users;
+    @ManyToMany
+    private Set<Date> dates;
+    @ManyToMany
+    private Set<Place> places;
 
     public User getAuthor() {
         return author;
@@ -57,5 +61,21 @@ public class Event {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    public Set<Date> getDates() {
+        return dates;
+    }
+
+    public void setDates(Set<Date> dates) {
+        this.dates = dates;
+    }
+
+    public Set<Place> getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(Set<Place> places) {
+        this.places = places;
     }
 }
