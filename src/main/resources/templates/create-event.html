@@ -11,14 +11,15 @@
 <div th:replace="fragments.html :: header"></div>
 <!-- PAGE CONTENT -->
 <div class="w3-main main-margin">
-    <p>Registrace proběhla úspěšně.</p>
-    <p th:text="'ID: ' + ${user.id}" />
-    <p th:text="'Křestní jméno: ' + ${user.firstName}" />
-    <p th:text="'Příjmení: ' + ${user.lastName}" />
-    <p th:text="'Uživateslké jméno: ' + ${user.username}" />
-    <p th:text="'Heslo: ' + ${user.password}" />
-    <p th:text="'E-mail: ' + ${user.email}" />
-    <p th:text="'Telefon: ' + ${user.phone}" />
+    <form th:action = "@{/create-event}" th:object="${event}" method = "post">
+        <div><label>Název: *</label><input type="text" required="required" pattern=".{5,}" th:field="*{name}"/></div>
+        <div><label>Popis: </label><input type="text" th:field="*{description}"/></div>
+        <div><input type="submit" value="Vytvořit událost"/></div>
+    </form>
+    <div>Pole označená * jsou povinná.</div>
+    <div th:if = "${param.error}">
+        err. // TODO
+    </div>
 <!-- End of PAGE CONTENT -->
 </div>
 <div th:replace="fragments.html :: footer"></div>

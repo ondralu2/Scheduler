@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+
     private final UserRepository repository;
 
     public UserService(UserRepository repository) {
@@ -23,7 +24,7 @@ public class UserService {
         return repository.findAll();
     }
 
-    public void save(User s) {
-        repository.save(s);
+    public void save(User user) {
+        repository.save(user);
     }
 }

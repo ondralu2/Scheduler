@@ -2,24 +2,39 @@ package com.project.scheduler.entity;
 
 import com.sun.istack.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class User {
     @Id
     @GeneratedValue
+    @Column
     private long id;
+    @Column
     private String firstName;
+    @Column
     private String lastName;
     @NotNull
+    @Column
     private String username;
     @NotNull
+    @Column
     private String password;
     @NotNull
+    @Column
     private String email;
+    @Column
     private String phone;
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Event> authorEvents;
+    @ManyToMany
+    @JoinTable(
+            name = "user_event",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private Set<Event> events;
 
     public User() {
     }
@@ -78,6 +93,14 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
     }
 
     @Override

@@ -9,20 +9,35 @@ import java.util.Set;
 public class Event {
     @Id
     @GeneratedValue
+    @Column
     private long id;
     @NotNull
+    @Column
     private String name;
+    @Column
     private String description;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private User author;
-    @ManyToMany
+    @ManyToMany(
+            fetch = FetchType.EAGER,
+            mappedBy = "events"
+    )
     private Set<User> users;
     @ManyToMany
     private Set<Date> dates;
     @ManyToMany
     private Set<Place> places;
+/*
+    public Set<Event> findByUserId(long id) {
+        Set<Event> events = (Set<Event>) new ArrayList<Event>();
+        for () {
 
+        }
+        events.add()
+        return events;
+    }
+*/
     public User getAuthor() {
         return author;
     }
