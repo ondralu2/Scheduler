@@ -11,12 +11,26 @@
 <div th:replace="fragments.html :: header"></div>
 <!-- PAGE CONTENT -->
 <div class="w3-main main-margin">
-    <tr th:each="event : ${events}">
-        <td><span th:text="${event.id}"> ID </span></td>
-        <td><span th:text="${event.name}"> Name </span></td>
-        <td><span th:text="${event.description}"> Description </span></td>
-        </br>
-    </tr>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Název</th>
+            <th>Popis</th>
+            <th>Autor</th>
+            <th>Uživatelé</th>
+        </tr>
+        <tr th:each="event : ${events}">
+            <td th:text="${event.id}">ID</td>
+            <td th:text="${event.name}">Název</td>
+            <td th:text="${event.description}">Popis</td>
+            <td th:text="${event.author.username}">Autor</td>
+            <td>
+                <p th:each="user : ${event.users}">
+                    <span th:text="${user.username}">Login</span>
+                </p>
+            </td>
+        </tr>
+    </table>
 <!-- End of PAGE CONTENT -->
 </div>
 <div th:replace="fragments.html :: footer"></div>

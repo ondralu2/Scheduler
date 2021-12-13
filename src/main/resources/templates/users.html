@@ -11,12 +11,14 @@
 <div th:replace="fragments.html :: header"></div>
 <!-- PAGE CONTENT -->
 <div class="w3-main main-margin">
-    <tr th:each="user : ${users}">
-        <td><span th:text="${user.id}"> ID </span></td>
-        <td><span th:text="${user.username}"> Username </span></td>
-        <td><span th:text="${user.password}"> Password </span></td>
-        </br>
-    </tr>
+    <table>
+        <tr th:each="user : ${users}">
+            <td><span th:text="${user.id}"> ID </span></td>
+            <td><span th:text="${user.username}"> Username </span></td>
+            <td><span th:text="${user.password}"> Password </span></td>
+            </br>
+        </tr>
+    </table>
 <!-- End of PAGE CONTENT -->
 </div>
 <div th:replace="fragments.html :: footer"></div>

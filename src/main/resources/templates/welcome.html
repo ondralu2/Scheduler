@@ -11,7 +11,7 @@
 <div th:replace="fragments.html :: header"></div>
 <!-- PAGE CONTENT -->
 <div class="w3-main main-margin">
-    <h2>Vítejte, [[${#httpServletRequest.remoteUser}]].</h2>
+    <h2>Vítejte, <span th:text ="${user.firstName + ' ' + user.lastName}"></span>.</h2>
 <!-- End of PAGE CONTENT -->
 </div>
 <div th:replace="fragments.html :: footer"></div>

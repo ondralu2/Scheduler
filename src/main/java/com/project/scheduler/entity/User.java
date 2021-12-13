@@ -1,12 +1,15 @@
 package com.project.scheduler.entity;
 
 import com.sun.istack.NotNull;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue
     @Column
@@ -67,8 +70,33 @@ public class User {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public void setUsername(String userName) {
         this.username = userName;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
     public String getPassword() {
@@ -101,6 +129,14 @@ public class User {
 
     public void setEvents(Set<Event> events) {
         this.events = events;
+    }
+
+    public Set<Event> getAuthorEvents() {
+        return authorEvents;
+    }
+
+    public void setAuthorEvents(Set<Event> authorEvents) {
+        this.authorEvents = authorEvents;
     }
 
     @Override

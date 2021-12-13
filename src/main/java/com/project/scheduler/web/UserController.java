@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @Controller
@@ -30,8 +31,9 @@ public class UserController {
         return "login";
     }
 
-    @RequestMapping("/welcome")
-    public String welcome(){
+    @GetMapping("/welcome")
+    public String welcome(Model model, Principal loggedInUser){
+        model.addAttribute("user", service.findByUsername(loggedInUser.getName()));
         return "welcome";
     }
 

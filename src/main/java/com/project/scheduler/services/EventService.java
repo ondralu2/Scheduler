@@ -1,7 +1,7 @@
 package com.project.scheduler.services;
 
-import com.project.scheduler.repository.EventRepository;
 import com.project.scheduler.entity.Event;
+import com.project.scheduler.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

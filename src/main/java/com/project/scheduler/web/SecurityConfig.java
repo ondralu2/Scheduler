@@ -11,13 +11,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.
-                authorizeRequests()
-                .antMatchers("/", "/css/**", "/register*").permitAll() // "/users"
-                .anyRequest().authenticated()
+        http.cors()
                 .and()
-                .formLogin().loginPage("/login").permitAll()
+                .authorizeRequests()
+                    .antMatchers("/", "/css/**", "/register*").permitAll() // "/users"
+                    .anyRequest().authenticated()
                 .and()
-                .logout().permitAll();
+                    .formLogin().loginPage("/login").permitAll()
+                .and()
+                    .logout().permitAll();
     }
 }
