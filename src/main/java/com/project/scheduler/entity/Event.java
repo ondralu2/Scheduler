@@ -21,14 +21,24 @@ public class Event {
     private User author;
     @ManyToMany
     @JoinTable(
-            name = "user_event",
+            name = "events_occupants",
             joinColumns = @JoinColumn(name = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
+            inverseJoinColumns = @JoinColumn(name = "occupant_id")
     )
     private Set<User> users;
     @ManyToMany
+    @JoinTable(
+            name = "events_terms",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "term_id")
+    )
     private Set<Date> dates;
     @ManyToMany
+    @JoinTable(
+            name = "events_places",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "place_id")
+    )
     private Set<Place> places;
 /*
     public Set<Event> findByUserId(long id) {

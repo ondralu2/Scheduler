@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Set;
 
 @Entity
+@Table(name = "occupant")
 public class User implements UserDetails {
     @Id
     @GeneratedValue
@@ -33,8 +34,8 @@ public class User implements UserDetails {
     private Set<Event> authorEvents;
     @ManyToMany
     @JoinTable(
-            name = "user_event",
-            joinColumns = @JoinColumn(name = "user_id"),
+            name = "events_occupants",
+            joinColumns = @JoinColumn(name = "occupant_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
     private Set<Event> events;

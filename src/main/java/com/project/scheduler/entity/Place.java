@@ -2,10 +2,7 @@ package com.project.scheduler.entity;
 
 import com.sun.istack.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Place {
@@ -15,6 +12,7 @@ public class Place {
     @NotNull
     private String name;
     private String street;
+    @Column(name = "street_number")
     private String number;
     private String city;
     private String zip;

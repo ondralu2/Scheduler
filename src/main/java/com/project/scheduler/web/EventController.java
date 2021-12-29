@@ -24,18 +24,6 @@ public class EventController {
     public EventController(EventService service, UserService userService) {
         this.service = service;
         this.userService = userService;
-        Event e = new Event();
-        e.setName("Vánoční večírek");
-        e.setDescription("Tradiční každoroční bowling.");
-        User u = new User();
-        u.setUsername("User1");
-        userService.save(u);
-        e.setAuthor(u);
-        Set<User> users = new HashSet<>();
-        users.add(u);
-        //users.add(userService.findByUsername("User1"));
-        e.setUsers(users);
-        service.save(e);
     }
 
     @GetMapping("/events")

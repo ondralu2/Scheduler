@@ -16,14 +16,6 @@ public class UserController {
 
     public UserController(UserService service) {
         this.service = service;
-        User u = new User();
-        u.setFirstName("Lukáš");
-        u.setLastName("Ondráček");
-        u.setUsername("ondralu2");
-        u.setPassword("password");
-        u.setEmail("ondralu2@uhk.cz");
-        u.setPhone("730632526");
-        service.save(u);
     }
 
     @RequestMapping("/login")
