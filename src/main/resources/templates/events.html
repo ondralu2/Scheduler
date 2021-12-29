@@ -25,9 +25,9 @@
             <td th:text="${event.description}">Popis</td>
             <td th:text="${event.author.username}">Autor</td>
             <td>
-                <p th:each="user : ${event.users}">
+                <span th:each="user : ${event.users}">
                     <span th:text="${user.username}">Login</span>
-                </p>
+                </span>
             </td>
         </tr>
     </table>
