@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:replace="fragments.html :: css-primary">
+    <link th:replace="fragments.html :: css-secondary">
+    <link th:replace="fragments.html :: font">
+    <title>Naplánujte si setkání</title>
+</head>
+<body>
+<div th:replace="fragments.html :: header"></div>
+<!-- PAGE CONTENT -->
+<div class="w3-main main-margin">
+    <form th:action = "@{__${#httpServletRequest.requestURI}__}" th:object="${date}" method = "post">
+        <div><label>Název termínu: *</label><input type="text" required="required" pattern=".{5,}" th:field="*{name}"/></div>
+        <div><label>Začátek: </label><input type="datetime-local" th:field="*{dateFrom}"/></div>
+        <div><label>Konec: </label><input type="datetime-local" th:field="*{dateTo}"/></div>
+        <div><input type="submit" value="Přidat"/></div>
+    </form>
+    <div>Pole označená * jsou povinná.</div>
+    <div th:if = "${param.error}">
+        Vyplňte všechna pole správně.
+    </div>
+    <div th:if = "${param.added != null}">
+        Termín přidán (<span th:text="${param.added[0]}" />).
+    </div>
+<!-- End of PAGE CONTENT -->
+</div>
+<div th:replace="fragments.html :: footer"></div>
+<script th:replace="fragments.html :: script"></script>
+</body>
+</html>

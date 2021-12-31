@@ -18,6 +18,8 @@
             <th>Popis</th>
             <th>Autor</th>
             <th>Uživatelé</th>
+            <th>Termíny</th>
+            <th>Místa</th>
         </tr>
         <tr th:each="event : ${events}">
             <td th:text="${event.id}">ID</td>
@@ -29,6 +31,18 @@
                     <span th:text="${user.username}">Login</span>
                 </span>
             </td>
+            <td>
+                <span th:each="date : ${event.dates}">
+                    <span th:text="${date.name}">Login</span>
+                </span>
+            </td>
+            <td>
+                <span th:each="place : ${event.places}">
+                    <span th:text="${place.name}">Login</span>
+                </span>
+            </td>
+            <td><a th:href="@{/add-date/{id}(id=${event.id})}">Přidat termíny</a></td>
+            <td><a th:href="@{/add-place/{id}(id=${event.id})}">Přidat místa</a></td>
         </tr>
     </table>
 <!-- End of PAGE CONTENT -->

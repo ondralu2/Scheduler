@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:replace="fragments.html :: css-primary">
+    <link th:replace="fragments.html :: css-secondary">
+    <link th:replace="fragments.html :: font">
+    <title>Naplánujte si setkání</title>
+</head>
+<body>
+<div th:replace="fragments.html :: header"></div>
+<!-- PAGE CONTENT -->
+<div class="w3-main main-margin">
+    <form th:action = "@{__${#httpServletRequest.requestURI}__}" method = "post">
+        <div><label>Název místa: *</label><input type="text" required="required" pattern=".{5,}" th:value="${place.name}" name="name"/></div>
+        <div><label>Ulice:</label><input type="text" th:value="${place.street}" name="street"/></div>
+        <div><label>Číslo popisné:</label><input type="text" th:value="${place.number}" name="number"/></div>
+        <div><label>Město:</label><input type="text" th:value="${place.city}" name="city"/></div>
+        <div><label>PSČ:</label><input type="text" th:value="${place.zip}" name="zip"/></div>
+        <div><label>Zeměpisná šířka:</label><input type="number" min="0" max="90" step="0.0000001" th:value="${coordinate.latDeg}" name="latDeg"/></div>
+        <div><label>Směr:</label>
+        <select name="latDir">
+            <option th:each="latDir : ${T(com.project.scheduler.entity.LatitudeDirection).values()}"
+                    th:value="${latDir}" th:text="${latDir}"></option>
+        </select></div>
+        <div><label>Zeměpisná délka:</label><input type="number" min="0" max="180" step="0.0000001" th:value="${coordinate.longDeg}" name="longDeg"/></div>
+        <div><label>Směr:</label>
+        <select name="longDir">
+            <option th:each="longDir : ${T(com.project.scheduler.entity.LongitudeDirection).values()}"
+                    th:value="${longDir}" th:text="${longDir}"></option>
+        </select></div>
+        <div><input type="submit" value="Přidat"/></div>
+    </form>
+    <div>Pole označená * jsou povinná.</div>
+    <div th:if = "${param.error}">
+        Vyplňte všechna pole správně.
+    </div>
+    <div th:if = "${param.added != null}">
+        Místo přidáno (<span th:text="${param.added[0]}" />).
+    </div>
+<!-- End of PAGE CONTENT -->
+</div>
+<div th:replace="fragments.html :: footer"></div>
+<script th:replace="fragments.html :: script"></script>
+</body>
+</html>

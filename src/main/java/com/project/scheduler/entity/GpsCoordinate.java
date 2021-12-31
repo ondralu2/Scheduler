@@ -12,11 +12,11 @@ public class GpsCoordinate {
     @GeneratedValue
     private long id;
     @NotNull
-    private long latDeg;
+    private double latDeg;
     @NotNull
     private LatitudeDirection latDir;
     @NotNull
-    private long longDeg;
+    private double longDeg;
     @NotNull
     private LongitudeDirection longDir;
 
@@ -28,11 +28,11 @@ public class GpsCoordinate {
         this.id = id;
     }
 
-    public long getLatDeg() {
+    public double getLatDeg() {
         return latDeg;
     }
 
-    public void setLatDeg(long latDeg) {
+    public void setLatDeg(double latDeg) {
         this.latDeg = latDeg;
     }
 
@@ -44,11 +44,11 @@ public class GpsCoordinate {
         this.latDir = latDir;
     }
 
-    public long getLongDeg() {
+    public double getLongDeg() {
         return longDeg;
     }
 
-    public void setLongDeg(long longDeg) {
+    public void setLongDeg(double longDeg) {
         this.longDeg = longDeg;
     }
 
