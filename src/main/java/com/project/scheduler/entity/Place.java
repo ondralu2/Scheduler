@@ -3,6 +3,7 @@ package com.project.scheduler.entity;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Place {
@@ -19,6 +20,13 @@ public class Place {
     private String country;
     @OneToOne
     private GpsCoordinate location;
+    @ManyToMany
+    @JoinTable(
+            name = "occupants_places",
+            joinColumns = @JoinColumn(name = "place_id"),
+            inverseJoinColumns = @JoinColumn(name = "occupant_id")
+    )
+    private Set<User> users;
 
     public long getId() {
         return id;
@@ -82,5 +90,13 @@ public class Place {
 
     public void setLocation(GpsCoordinate location) {
         this.location = location;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

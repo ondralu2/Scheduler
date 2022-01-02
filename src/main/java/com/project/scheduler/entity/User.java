@@ -39,6 +39,20 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
     private Set<Event> events;
+    @ManyToMany
+    @JoinTable(
+            name = "occupants_terms",
+            joinColumns = @JoinColumn(name = "occupant_id"),
+            inverseJoinColumns = @JoinColumn(name = "term_id")
+    )
+    private Set<Date> dates;
+    @ManyToMany
+    @JoinTable(
+            name = "occupants_places",
+            joinColumns = @JoinColumn(name = "occupant_id"),
+            inverseJoinColumns = @JoinColumn(name = "place_id")
+    )
+    private Set<Place> places;
 
     public User() {
     }
@@ -138,6 +152,22 @@ public class User implements UserDetails {
 
     public void setAuthorEvents(Set<Event> authorEvents) {
         this.authorEvents = authorEvents;
+    }
+
+    public Set<Date> getDates() {
+        return dates;
+    }
+
+    public void setDates(Set<Date> dates) {
+        this.dates = dates;
+    }
+
+    public Set<Place> getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(Set<Place> places) {
+        this.places = places;
     }
 
     @Override

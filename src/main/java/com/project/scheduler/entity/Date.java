@@ -3,11 +3,9 @@ package com.project.scheduler.entity;
 import com.sun.istack.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "term")
@@ -21,6 +19,13 @@ public class Date {
     private LocalDateTime dateFrom;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime dateTo;
+    @ManyToMany
+    @JoinTable(
+            name = "occupants_terms",
+            joinColumns = @JoinColumn(name = "term_id"),
+            inverseJoinColumns = @JoinColumn(name = "occupant_id")
+    )
+    private Set<User> users;
 
     public long getId() {
         return id;
@@ -52,5 +57,13 @@ public class Date {
 
     public void setDateTo(LocalDateTime dateTo) {
         this.dateTo = dateTo;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }
