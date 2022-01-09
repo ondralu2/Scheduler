@@ -40,19 +40,6 @@ public class Event {
             inverseJoinColumns = @JoinColumn(name = "place_id")
     )
     private Set<Place> places;
-/*
-    public Set<Event> findByUserId(long id) {
-        Set<Event> events = (Set<Event>) new ArrayList<Event>();
-        for () {
-
-        }
-        events.add()
-        return events;
-    }
-*/
-    public User getAuthor() {
-        return author;
-    }
 
     public long getId() {
         return id;
@@ -76,6 +63,10 @@ public class Event {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public User getAuthor() {
+        return author;
     }
 
     public void setAuthor(User author) {
