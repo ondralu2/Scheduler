@@ -40,8 +40,7 @@ public class EventController {
     }
 
     @PostMapping("/create-event")
-    public String newEventSubmit(@ModelAttribute Event event, Model model, Principal loggedInUser) {
-        model.addAttribute("event", event);
+    public String newEventSubmit(@ModelAttribute Event event, Principal loggedInUser) {
         User user = userService.findByUsername(loggedInUser.getName());
         event.setAuthor(user);
         Set<User> users = new HashSet<>();

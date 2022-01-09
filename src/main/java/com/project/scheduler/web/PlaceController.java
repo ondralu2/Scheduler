@@ -36,9 +36,7 @@ public class PlaceController {
     }
 
     @PostMapping("/add-place/{eventId}")
-    public String addPlaceSubmit(@ModelAttribute Place place, @ModelAttribute GpsCoordinate coordinate, Model model, @PathVariable long eventId) {
-        model.addAttribute("place", place);
-        model.addAttribute("coordinate", coordinate);
+    public String addPlaceSubmit(@ModelAttribute Place place, @ModelAttribute GpsCoordinate coordinate, @PathVariable long eventId) {
         coordinateService.save(coordinate);
         place.setLocation(coordinate);
         service.save(place);

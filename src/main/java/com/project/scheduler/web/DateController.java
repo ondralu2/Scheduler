@@ -31,8 +31,7 @@ public class DateController {
     }
 
     @PostMapping("/add-date/{eventId}")
-    public String addDateSubmit(@ModelAttribute Date date, Model model, @PathVariable long eventId) {
-        model.addAttribute("date", date);
+    public String addDateSubmit(@ModelAttribute Date date, @PathVariable long eventId) {
         service.save(date);
         Event e = eventService.findById(eventId).get();
         Set<Date> dates = e.getDates();
