@@ -11,6 +11,7 @@
 <div th:replace="fragments.html :: header"></div>
 <!-- PAGE CONTENT -->
 <div class="w3-main main-margin">
+    <h2>Přihlášení.</h2>
     <form th:action = "@{/login}" method = "post">
         <div><label>Uživatelské jméno: </label><input type="text" name="username"/></div>
         <div><label>Heslo: </label><input type="password" name="password"/></div>

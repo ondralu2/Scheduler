@@ -11,6 +11,7 @@
 <div th:replace="fragments.html :: header"></div>
 <!-- PAGE CONTENT -->
 <div class="w3-main main-margin">
+    <h2>Přidání termínu k události.</h2>
     <form th:action = "@{__${#httpServletRequest.requestURI}__}" th:object="${date}" method = "post">
         <div><label>Název termínu: *</label><input type="text" required="required" pattern=".{5,}" th:field="*{name}"/></div>
         <div><label>Začátek: </label><input type="datetime-local" th:field="*{dateFrom}"/></div>

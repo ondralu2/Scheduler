@@ -11,6 +11,7 @@
 <div th:replace="fragments.html :: header"></div>
 <!-- PAGE CONTENT -->
 <div class="w3-main main-margin">
+    <h2>Přidání místa k události.</h2>
     <form th:action = "@{__${#httpServletRequest.requestURI}__}" method = "post">
         <div><label>Název místa: *</label><input type="text" required="required" pattern=".{5,}" th:value="${place.name}" name="name"/></div>
         <div><label>Ulice:</label><input type="text" th:value="${place.street}" name="street"/></div>

@@ -11,6 +11,7 @@
 <div th:replace="fragments.html :: header"></div>
 <!-- PAGE CONTENT -->
 <div class="w3-main main-margin">
+    <h2>Uživatelé.</h2>
     <table>
         <tr th:each="user : ${users}">
             <td><span th:text="${user.id}"> ID </span></td>
