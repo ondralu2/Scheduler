@@ -22,6 +22,13 @@ public class Place {
     private GpsCoordinate location;
     @ManyToMany
     @JoinTable(
+            name = "events_places",
+            joinColumns = @JoinColumn(name = "place_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private Set<Event> events;
+    @ManyToMany
+    @JoinTable(
             name = "occupants_places",
             joinColumns = @JoinColumn(name = "place_id"),
             inverseJoinColumns = @JoinColumn(name = "occupant_id")
@@ -90,6 +97,14 @@ public class Place {
 
     public void setLocation(GpsCoordinate location) {
         this.location = location;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
     }
 
     public Set<User> getUsers() {

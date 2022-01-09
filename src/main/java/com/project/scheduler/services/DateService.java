@@ -16,4 +16,8 @@ public class DateService {
     public void save(Date date) {
         repository.save(date);
     }
+
+    public void delete(long id) {
+        repository.delete(repository.getById(id));
+    }
 }

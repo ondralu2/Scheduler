@@ -16,4 +16,8 @@ public class PlaceService {
     public void save(Place place) {
         repository.save(place);
     }
+
+    public void delete(long id) {
+        repository.delete(repository.getById(id));
+    }
 }

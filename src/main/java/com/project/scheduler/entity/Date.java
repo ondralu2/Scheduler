@@ -21,6 +21,13 @@ public class Date {
     private LocalDateTime dateTo;
     @ManyToMany
     @JoinTable(
+            name = "events_terms",
+            joinColumns = @JoinColumn(name = "term_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private Set<Event> events;
+    @ManyToMany
+    @JoinTable(
             name = "occupants_terms",
             joinColumns = @JoinColumn(name = "term_id"),
             inverseJoinColumns = @JoinColumn(name = "occupant_id")
@@ -57,6 +64,14 @@ public class Date {
 
     public void setDateTo(LocalDateTime dateTo) {
         this.dateTo = dateTo;
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> events) {
+        this.events = events;
     }
 
     public Set<User> getUsers() {

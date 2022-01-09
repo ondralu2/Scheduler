@@ -67,13 +67,23 @@ public class UserController {
     @PostMapping("/add-user/{eventId}")
     public String addUserSubmit(@RequestParam String username, Model model, @PathVariable long eventId) {
         Event e = eventService.findById(eventId).get();
-        User user = service.findByUsername(username);
-        if (user == null)
+        User u = service.findByUsername(username);
+        if (u == null)
             return "redirect:/add-user/" + eventId + "?error";
         Set<User> users = e.getUsers();
-        users.add(user);
+        users.add(u);
         e.setUsers(users);
         eventService.save(e);
         return "redirect:/add-user/" + eventId + "?added=" + service.findByUsername(username).getUsername();
+    }
+
+    @RequestMapping(value = "/remove-user/{eventId}/{userId}", method = RequestMethod.GET)
+    public String removeUser(@PathVariable long eventId, @PathVariable long userId) {
+        Event e =  eventService.findById(eventId).get();
+        Set<User> users = e.getUsers();
+        users.remove(service.findById(userId).get());
+        e.setUsers(users);
+        eventService.save(e);
+        return "redirect:/events";
     }
 }

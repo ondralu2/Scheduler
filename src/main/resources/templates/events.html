@@ -12,40 +12,45 @@
 <!-- PAGE CONTENT -->
 <div class="w3-main main-margin">
     <h2>Události.</h2>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Název</th>
-            <th>Popis</th>
-            <th>Autor</th>
-            <th>Uživatelé</th>
-            <th>Termíny</th>
-            <th>Místa</th>
-        </tr>
-        <tr th:each="event : ${events}">
-            <td th:text="${event.id}">ID</td>
-            <td th:text="${event.name}">Název</td>
-            <td th:text="${event.description}">Popis</td>
-            <td th:text="${event.author.username}">Autor</td>
-            <td>
-                <span th:each="user : ${event.users}">
-                    <span th:text="${user.username}">Login</span>
-                </span>
-            </td>
-            <td>
-                <span th:each="date : ${event.dates}">
-                    <span th:text="${date.name}">Login</span>
-                </span>
-            </td>
-            <td>
-                <span th:each="place : ${event.places}">
-                    <span th:text="${place.name}">Login</span>
-                </span>
-            </td>
-            <td><a th:href="@{/add-date/{id}(id=${event.id})}">Přidat termíny</a></td>
-            <td><a th:href="@{/add-place/{id}(id=${event.id})}">Přidat místa</a></td>
-        </tr>
-    </table>
+    <div th:each="event : ${events}" class="fclear">
+        <h3 th:text="${event.name}"></h3>
+        <p th:text="${event.description}"></p>
+        <div class="fl">
+            <h4>Uživatelé:</h4>
+            <table>
+                <tr>
+                    <td th:text="${event.author.username} + ' (autor)'"></td>
+                </tr>
+                <tr th:each="user : ${event.users}" th:unless="${user.username} == ${event.author.username}">
+                    <td th:text="${user.username}"></td>
+                    <td><a th:href="@{/remove-user/{eventId}/{userId}(eventId=${event.id},userId=${user.id})}"><img src="graphics/icon-minus.png" alt="ikona mínus"></a></td>
+                </tr>
+            </table>
+            <a th:href="@{/add-user/{id}(id=${event.id})}"><img src="graphics/icon-plus.png" alt="ikona plus"></a>
+        </div>
+        <div class="fl">
+            <h4>Termíny:</h4>
+            <table>
+                <tr th:each="date : ${event.dates}">
+                    <td th:text="${date.name}"></td>
+                    <td><a th:href="@{/edit-date/{id}(id=${date.id})}"><img src="graphics/icon-pencil.png" alt="ikona tužka"></a></td>
+                    <td><a th:href="@{/remove-date/{id}(id=${date.id})}"><img src="graphics/icon-minus.png" alt="ikona mínus"></a></td>
+                </tr>
+            </table>
+            <a th:href="@{/add-date/{id}(id=${event.id})}"><img src="graphics/icon-plus.png" alt="ikona plus"></a>
+        </div>
+        <div class="fl">
+            <h4>Místa:</h4>
+            <table>
+                <tr th:each="place : ${event.places}">
+                    <td th:text="${place.name}"></td>
+                    <td><a th:href="@{/edit-place/{id}(id=${place.id})}"><img src="graphics/icon-pencil.png" alt="ikona tužka"></a></td>
+                    <td><a th:href="@{/remove-place/{id}(id=${place.id})}"><img src="graphics/icon-minus.png" alt="ikona mínus"></a></td>
+                </tr>
+            </table>
+            <a th:href="@{/add-place/{id}(id=${event.id})}"><img src="graphics/icon-plus.png" alt="ikona plus"></a>
+        </div>
+    </div>
 <!-- End of PAGE CONTENT -->
 </div>
 <div th:replace="fragments.html :: footer"></div>

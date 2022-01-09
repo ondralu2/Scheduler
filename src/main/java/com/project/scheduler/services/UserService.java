@@ -28,6 +28,10 @@ public class UserService {
         repository.save(user);
     }
 
+    public void delete(long id) {
+        repository.delete(repository.getById(id));
+    }
+
     public User findByUsername(String username) {
         return repository.findByUsername(username);
     };
