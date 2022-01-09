@@ -11,7 +11,7 @@
 <div th:replace="fragments.html :: header"></div>
 <!-- PAGE CONTENT -->
 <div class="w3-main main-margin">
-    <h2>Vytvoření nové události..</h2>
+    <h2>Vytvoření nové události.</h2>
     <form th:action = "@{/create-event}" th:object="${event}" method = "post">
         <div><label>Název: *</label><input type="text" required="required" pattern=".{5,}" th:field="*{name}"/></div>
         <div><label>Popis: </label><input type="text" th:field="*{description}"/></div>
