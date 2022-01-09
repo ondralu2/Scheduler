@@ -1,6 +1,8 @@
 package com.project.scheduler.web;
 
+import com.project.scheduler.entity.Event;
 import com.project.scheduler.entity.User;
+import com.project.scheduler.services.EventService;
 import com.project.scheduler.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,14 +10,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 public class UserController {
 
     private final UserService service;
+    private final EventService eventService;
 
-    public UserController(UserService service) {
+    public UserController(UserService service, EventService eventService) {
         this.service = service;
+        this.eventService = eventService;
     }
 
     @RequestMapping("/login")
@@ -52,5 +57,23 @@ public class UserController {
     public String users(Model model) {
         model.addAttribute("users", service.findAll());
         return "users";
+    }
+
+    @RequestMapping("/add-user/{eventId}")
+    public String addUser(Model model, @PathVariable long eventId){
+        return "add-user";
+    }
+
+    @PostMapping("/add-user/{eventId}")
+    public String addUserSubmit(@RequestParam String username, Model model, @PathVariable long eventId) {
+        Event e = eventService.findById(eventId).get();
+        User user = service.findByUsername(username);
+        if (user == null)
+            return "redirect:/add-user/" + eventId + "?error";
+        Set<User> users = e.getUsers();
+        users.add(user);
+        e.setUsers(users);
+        eventService.save(e);
+        return "redirect:/add-user/" + eventId + "?added=" + service.findByUsername(username).getUsername();
     }
 }

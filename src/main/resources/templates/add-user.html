@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:replace="fragments.html :: css-primary">
+    <link th:replace="fragments.html :: css-secondary">
+    <link th:replace="fragments.html :: font">
+    <title>Naplánujte si setkání</title>
+</head>
+<body>
+<div th:replace="fragments.html :: header"></div>
+<!-- PAGE CONTENT -->
+<div class="w3-main main-margin">
+    <h2>Přidání uživatele k události.</h2>
+    <form th:action = "@{__${#httpServletRequest.requestURI}__}" method = "post">
+        <div><label>Uživatelské jméno: </label><input type="text" required="required" pattern="[A-Za-z0-9]+" th:value="${username}" name="username"/></div>
+        <div><input type="submit" value="Přidat"/></div>
+    </form>
+    <div style="visibility:hidden">Je možné přidat jednoho uživatele nebo více uživatelů oddělených středníkem.</div>
+    <div th:if = "${param.error}">
+        Zadaný uživatel nenalezen.
+    </div>
+    <div th:if = "${param.added != null}">
+        Uživatel přidán (<span th:text="${param.added[0]}" />).
+    </div>
+<!-- End of PAGE CONTENT -->
+</div>
+<div th:replace="fragments.html :: footer"></div>
+<script th:replace="fragments.html :: script"></script>
+</body>
+</html>
