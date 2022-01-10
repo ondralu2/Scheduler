@@ -23,38 +23,56 @@
                 </tr>
                 <tr th:each="user : ${event.users}" th:unless="${user.username} == ${event.author.username}">
                     <td th:text="${user.username}"></td>
-                    <td><a th:href="@{/remove-user/{eventId}/{userId}(eventId=${event.id},userId=${user.id})}"><img src="graphics/icon-minus.png" alt="ikona mínus"></a></td>
+                    <td th:if="${loggedInUser} == ${event.author}">
+                        <a th:href="@{/remove-user/{eventId}/{userId}(eventId=${event.id},userId=${user.id})}"><img src="graphics/icon-bin.png" alt="ikona popelnice"></a>
+                    </td>
                 </tr>
             </table>
-            <a th:href="@{/add-user/{id}(id=${event.id})}"><img src="graphics/icon-plus.png" alt="ikona plus"></a>
+            <a th:href="@{/add-user/{id}(id=${event.id})}" th:if="${loggedInUser} == ${event.author}"><img src="graphics/icon-plus.png" alt="ikona plus"></a>
         </div>
         <div class="fl">
             <h4>Termíny:</h4>
             <table>
-                <tr th:each="date : ${event.dates}">
+                <tr th:each="date : ${event.dates}" th:style="${#lists.contains(date.users, loggedInUser)} ? 'font-weight: bold'">
                     <td th:text="${date.name}"></td>
                     <td th:text="${#lists.size(date.users)}"></td>
-                    <td><a th:href="@{/enrol-date/{id}/{userId}(id=${date.id},userId=${loggedInUser.id})}"><img src="graphics/icon-true.png" alt="ikona pravda"></a></td>
-                    <td><a th:href="@{/leave-date/{id}/{userId}(id=${date.id},userId=${loggedInUser.id})}"><img src="graphics/icon-false.png" alt="ikona nepravda"></a></td>
-                    <td><a th:href="@{/edit-date/{id}(id=${date.id})}"><img src="graphics/icon-pencil.png" alt="ikona tužka"></a></td>
-                    <td><a th:href="@{/remove-date/{id}(id=${date.id})}"><img src="graphics/icon-minus.png" alt="ikona mínus"></a></td>
+                    <td th:unless="${#lists.contains(date.users, loggedInUser)}">
+                        <a th:href="@{/enrol-date/{id}/{userId}(id=${date.id},userId=${loggedInUser.id})}"><img src="graphics/icon-true.png" alt="ikona pravda"></a>
+                    </td>
+                    <td th:if="${#lists.contains(date.users, loggedInUser)}">
+                        <a th:href="@{/leave-date/{id}/{userId}(id=${date.id},userId=${loggedInUser.id})}"><img src="graphics/icon-false.png" alt="ikona nepravda"></a>
+                    </td>
+                    <td th:if="${loggedInUser} == ${event.author}">
+                        <a th:href="@{/edit-date/{id}(id=${date.id})}"><img src="graphics/icon-pencil.png" alt="ikona tužka"></a>
+                    </td>
+                    <td th:if="${loggedInUser} == ${event.author}">
+                        <a th:href="@{/remove-date/{id}(id=${date.id})}"><img src="graphics/icon-bin.png" alt="ikona popelnice"></a>
+                    </td>
                 </tr>
             </table>
-            <a th:href="@{/add-date/{id}(id=${event.id})}"><img src="graphics/icon-plus.png" alt="ikona plus"></a>
+            <a th:href="@{/add-date/{id}(id=${event.id})}" th:if="${loggedInUser} == ${event.author}"><img src="graphics/icon-plus.png" alt="ikona plus"></a>
         </div>
         <div class="fl">
             <h4>Místa:</h4>
             <table>
-                <tr th:each="place : ${event.places}">
+                <tr th:each="place : ${event.places}" th:style="${#lists.contains(place.users, loggedInUser)} ? 'font-weight: bold'">
                     <td th:text="${place.name}"></td>
                     <td th:text="${#lists.size(place.users)}"></td>
-                    <td><a th:href="@{/enrol-place/{id}/{userId}(id=${place.id},userId=${loggedInUser.id})}"><img src="graphics/icon-true.png" alt="ikona pravda"></a></td>
-                    <td><a th:href="@{/leave-place/{id}/{userId}(id=${place.id},userId=${loggedInUser.id})}"><img src="graphics/icon-false.png" alt="ikona nepravda"></a></td>
-                    <td><a th:href="@{/edit-place/{id}(id=${place.id})}"><img src="graphics/icon-pencil.png" alt="ikona tužka"></a></td>
-                    <td><a th:href="@{/remove-place/{id}(id=${place.id})}"><img src="graphics/icon-minus.png" alt="ikona mínus"></a></td>
+                    <td th:unless="${#lists.contains(place.users, loggedInUser)}">
+                        <a th:href="@{/enrol-place/{id}/{userId}(id=${place.id},userId=${loggedInUser.id})}"><img src="graphics/icon-true.png" alt="ikona pravda"></a>
+                    </td>
+                    <td th:if="${#lists.contains(place.users, loggedInUser)}">
+                        <a th:href="@{/leave-place/{id}/{userId}(id=${place.id},userId=${loggedInUser.id})}"><img src="graphics/icon-false.png" alt="ikona nepravda"></a>
+                    </td>
+                    <td th:if="${loggedInUser} == ${event.author}">
+                        <a th:href="@{/edit-place/{id}(id=${place.id})}"><img src="graphics/icon-pencil.png" alt="ikona tužka"></a>
+                    </td>
+                    <td th:if="${loggedInUser} == ${event.author}">
+                        <a th:href="@{/remove-place/{id}(id=${place.id})}"><img src="graphics/icon-bin.png" alt="ikona popelnice"></a>
+                    </td>
                 </tr>
             </table>
-            <a th:href="@{/add-place/{id}(id=${event.id})}"><img src="graphics/icon-plus.png" alt="ikona plus"></a>
+            <a th:href="@{/add-place/{id}(id=${event.id})}" th:if="${loggedInUser} == ${event.author}"><img src="graphics/icon-plus.png" alt="ikona plus"></a>
         </div>
     </div>
 <!-- End of PAGE CONTENT -->
