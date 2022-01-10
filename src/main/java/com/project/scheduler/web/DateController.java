@@ -42,6 +42,18 @@ public class DateController {
         return "redirect:/add-date/" + eventId + "?added=" + date.getName();
     }
 
+    @RequestMapping("/edit-date/{id}")
+    public String editDate(@PathVariable long id, Model model){
+        model.addAttribute("date", service.findById(id).get());
+        return "edit-date";
+    }
+
+    @PostMapping("/edit-date/{id}")
+    public String editDateSubmit(@PathVariable long id, @ModelAttribute Date date) {
+        service.save(date);
+        return "redirect:/edit-date/" + id + "?edited=1";
+    }
+
     @RequestMapping(value = "/remove-date/{dateId}", method = RequestMethod.GET)
     public String removeDate(@PathVariable long dateId) {
         service.delete(dateId);

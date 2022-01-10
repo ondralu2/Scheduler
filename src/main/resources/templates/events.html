@@ -13,7 +13,11 @@
 <div class="w3-main main-margin">
     <h2>Události.</h2>
     <div th:each="event : ${events}" class="fclear">
-        <h3 th:text="${event.name}"></h3>
+        <h3>
+            <span th:text="${event.name}"></span>
+            <a th:href="@{/edit-event/{id}(id=${event.id})}" th:if="${loggedInUser} == ${event.author}"><img src="graphics/icon-pencil.png" alt="ikona tužka"></a>
+            <a th:href="@{/delete-event/{id}(id=${event.id})}" th:if="${loggedInUser} == ${event.author}"><img src="graphics/icon-bin.png" alt="ikona popelnice"></a>
+        </h3>
         <p th:text="${event.description}"></p>
         <div class="fl">
             <h4>Uživatelé:</h4>

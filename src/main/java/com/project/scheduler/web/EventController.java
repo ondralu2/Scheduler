@@ -6,10 +6,7 @@ import com.project.scheduler.services.EventService;
 import com.project.scheduler.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.HashSet;
@@ -51,4 +48,27 @@ public class EventController {
         return "created-event";
     }
 
+    @RequestMapping("/edit-event/{id}")
+    public String editEvent(@PathVariable long id, Model model){
+        model.addAttribute("event", service.findById(id).get());
+        return "edit-event";
+    }
+
+    @PostMapping("/edit-event/{id}")
+    public String editEventSubmit(@PathVariable long id, @ModelAttribute Event event) {
+        service.save(event);
+        return "redirect:/edit-event/" + id + "?edited=1";
+    }
+
+    @RequestMapping(value = "/delete-event/{id}")
+    public String removeEvent(@PathVariable long id, Model model) {
+        model.addAttribute("event", service.findById(id).get());
+        return "delete-event";
+    }
+
+    @RequestMapping(value = "/delete-event-confirm/{id}", method = RequestMethod.GET)
+    public String removeEventConfirm(@PathVariable long id) {
+        service.delete(id);
+        return "redirect:/events";
+    }
 }

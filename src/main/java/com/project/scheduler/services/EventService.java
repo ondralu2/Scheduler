@@ -27,4 +27,8 @@ public class EventService {
     public void save(Event event) {
         repository.save(event);
     }
+
+    public void delete(long id) {
+        repository.delete(repository.getById(id));
+    }
 }

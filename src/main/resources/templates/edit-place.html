@@ -1,0 +1,297 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:replace="fragments.html :: css-primary">
+    <link th:replace="fragments.html :: css-secondary">
+    <link th:replace="fragments.html :: font">
+    <title>Naplánujte si setkání</title>
+</head>
+<body>
+<div th:replace="fragments.html :: header"></div>
+<!-- PAGE CONTENT -->
+<div class="w3-main main-margin">
+    <h2>Úprava místa.</h2>
+    <form th:action = "@{__${#httpServletRequest.requestURI}__}" method = "post">
+        <div><label>Název místa: *</label><input type="text" required="required" pattern=".{5,}" th:value="${place.name}" name="name"/></div>
+        <div><label>Ulice:</label><input type="text" th:value="${place.street}" name="street"/></div>
+        <div><label>Číslo popisné:</label><input type="text" th:value="${place.number}" name="number"/></div>
+        <div><label>Město:</label><input type="text" th:value="${place.city}" name="city"/></div>
+        <div><label>PSČ:</label><input type="text" th:value="${place.zip}" name="zip"/></div>
+        <div><label>Stát:</label>
+        <select name="country">
+            <option th:value="'Abcházie'" th:text="'Abcházie'"></option>
+            <option th:value="'Afghánistán'" th:text="'Afghánistán'"></option>
+            <option th:value="'Alandy'" th:text="'Alandy'"></option>
+            <option th:value="'Albánie'" th:text="'Albánie'"></option>
+            <option th:value="'Alžírsko'" th:text="'Alžírsko'"></option>
+            <option th:value="'Americká Samoa'" th:text="'Americká Samoa'"></option>
+            <option th:value="'Americké Panenské ostrovy'" th:text="'Americké Panenské ostrovy'"></option>
+            <option th:value="'Andorra'" th:text="'Andorra'"></option>
+            <option th:value="'Angola'" th:text="'Angola'"></option>
+            <option th:value="'Anguilla'" th:text="'Anguilla'"></option>
+            <option th:value="'Antigua a Barbuda'" th:text="'Antigua a Barbuda'"></option>
+            <option th:value="'Argentina'" th:text="'Argentina'"></option>
+            <option th:value="'Arménie'" th:text="'Arménie'"></option>
+            <option th:value="'Aruba'" th:text="'Aruba'"></option>
+            <option th:value="'Austrálie'" th:text="'Austrálie'"></option>
+            <option th:value="'Ázerbájdžán'" th:text="'Ázerbájdžán'"></option>
+            <option th:value="'Bahamy'" th:text="'Bahamy'"></option>
+            <option th:value="'Bahrajn'" th:text="'Bahrajn'"></option>
+            <option th:value="'Bangladéš'" th:text="'Bangladéš'"></option>
+            <option th:value="'Barbados'" th:text="'Barbados'"></option>
+            <option th:value="'Belgie'" th:text="'Belgie'"></option>
+            <option th:value="'Belize'" th:text="'Belize'"></option>
+            <option th:value="'Bělorusko'" th:text="'Bělorusko'"></option>
+            <option th:value="'Benin'" th:text="'Benin'"></option>
+            <option th:value="'Bermudy'" th:text="'Bermudy'"></option>
+            <option th:value="'Bhútán'" th:text="'Bhútán'"></option>
+            <option th:value="'Bolívie'" th:text="'Bolívie'"></option>
+            <option th:value="'Bosna a Hercegovina'" th:text="'Bosna a Hercegovina'"></option>
+            <option th:value="'Botswana'" th:text="'Botswana'"></option>
+            <option th:value="'Brazílie'" th:text="'Brazílie'"></option>
+            <option th:value="'Britské Panenské ostrovy'" th:text="'Britské Panenské ostrovy'"></option>
+            <option th:value="'Brunej'" th:text="'Brunej'"></option>
+            <option th:value="'Bulharsko'" th:text="'Bulharsko'"></option>
+            <option th:value="'Burkina Faso'" th:text="'Burkina Faso'"></option>
+            <option th:value="'Burundi'" th:text="'Burundi'"></option>
+            <option th:value="'Cookovy ostrovy'" th:text="'Cookovy ostrovy'"></option>
+            <option th:value="'Curaçao'" th:text="'Curaçao'"></option>
+            <option th:value="'Čad'" th:text="'Čad'"></option>
+            <option th:value="'Černá Hora'" th:text="'Černá Hora'"></option>
+            <option th:value="'Česko'" th:text="'Česko'" selected="'selected'"></option>
+            <option th:value="'Čína'" th:text="'Čína'"></option>
+            <option th:value="'Dánsko'" th:text="'Dánsko'"></option>
+            <option th:value="'Dominika'" th:text="'Dominika'"></option>
+            <option th:value="'Dominikánská republika'" th:text="'Dominikánská republika'"></option>
+            <option th:value="'Džibutsko'" th:text="'Džibutsko'"></option>
+            <option th:value="'Egypt'" th:text="'Egypt'"></option>
+            <option th:value="'Ekvádor'" th:text="'Ekvádor'"></option>
+            <option th:value="'Eritrea'" th:text="'Eritrea'"></option>
+            <option th:value="'Estonsko'" th:text="'Estonsko'"></option>
+            <option th:value="'Etiopie'" th:text="'Etiopie'"></option>
+            <option th:value="'Faerské ostrovy'" th:text="'Faerské ostrovy'"></option>
+            <option th:value="'Falklandy'" th:text="'Falklandy'"></option>
+            <option th:value="'Fidži'" th:text="'Fidži'"></option>
+            <option th:value="'Filipíny'" th:text="'Filipíny'"></option>
+            <option th:value="'Finsko'" th:text="'Finsko'"></option>
+            <option th:value="'Francie'" th:text="'Francie'"></option>
+            <option th:value="'Francouzská Guyana'" th:text="'Francouzská Guyana'"></option>
+            <option th:value="'Francouzská Polynésie'" th:text="'Francouzská Polynésie'"></option>
+            <option th:value="'Gabon'" th:text="'Gabon'"></option>
+            <option th:value="'Gambie'" th:text="'Gambie'"></option>
+            <option th:value="'Ghana'" th:text="'Ghana'"></option>
+            <option th:value="'Gibraltar'" th:text="'Gibraltar'"></option>
+            <option th:value="'Grenada'" th:text="'Grenada'"></option>
+            <option th:value="'Grónsko'" th:text="'Grónsko'"></option>
+            <option th:value="'Gruzie'" th:text="'Gruzie'"></option>
+            <option th:value="'Guadeloupe'" th:text="'Guadeloupe'"></option>
+            <option th:value="'Guam'" th:text="'Guam'"></option>
+            <option th:value="'Guatemala'" th:text="'Guatemala'"></option>
+            <option th:value="'Guernsey'" th:text="'Guernsey'"></option>
+            <option th:value="'Guinea'" th:text="'Guinea'"></option>
+            <option th:value="'Guinea-Bissau'" th:text="'Guinea-Bissau'"></option>
+            <option th:value="'Guyana'" th:text="'Guyana'"></option>
+            <option th:value="'Haiti'" th:text="'Haiti'"></option>
+            <option th:value="'Honduras'" th:text="'Honduras'"></option>
+            <option th:value="'Hongkong'" th:text="'Hongkong'"></option>
+            <option th:value="'Chile'" th:text="'Chile'"></option>
+            <option th:value="'Chorvatsko'" th:text="'Chorvatsko'"></option>
+            <option th:value="'Indie'" th:text="'Indie'"></option>
+            <option th:value="'Indonésie'" th:text="'Indonésie'"></option>
+            <option th:value="'Irák'" th:text="'Irák'"></option>
+            <option th:value="'Írán'" th:text="'Írán'"></option>
+            <option th:value="'Irsko'" th:text="'Irsko'"></option>
+            <option th:value="'Island'" th:text="'Island'"></option>
+            <option th:value="'Itálie'" th:text="'Itálie'"></option>
+            <option th:value="'Izrael'" th:text="'Izrael'"></option>
+            <option th:value="'Jamajka'" th:text="'Jamajka'"></option>
+            <option th:value="'Japonsko'" th:text="'Japonsko'"></option>
+            <option th:value="'Jemen'" th:text="'Jemen'"></option>
+            <option th:value="'Jersey'" th:text="'Jersey'"></option>
+            <option th:value="'Jihoafrická republika'" th:text="'Jihoafrická republika'"></option>
+            <option th:value="'Jižní Korea'" th:text="'Jižní Korea'"></option>
+            <option th:value="'Jižní Osetie'" th:text="'Jižní Osetie'"></option>
+            <option th:value="'Jižní Súdán'" th:text="'Jižní Súdán'"></option>
+            <option th:value="'Jordánsko'" th:text="'Jordánsko'"></option>
+            <option th:value="'Kajmanské ostrovy'" th:text="'Kajmanské ostrovy'"></option>
+            <option th:value="'Kambodža'" th:text="'Kambodža'"></option>
+            <option th:value="'Kamerun'" th:text="'Kamerun'"></option>
+            <option th:value="'Kanada'" th:text="'Kanada'"></option>
+            <option th:value="'Kapverdy'" th:text="'Kapverdy'"></option>
+            <option th:value="'Karibské Nizozemsko'" th:text="'Karibské Nizozemsko'"></option>
+            <option th:value="'Katar'" th:text="'Katar'"></option>
+            <option th:value="'Kazachstán'" th:text="'Kazachstán'"></option>
+            <option th:value="'Keňa'" th:text="'Keňa'"></option>
+            <option th:value="'Kiribati'" th:text="'Kiribati'"></option>
+            <option th:value="'Kokosové ostrovy'" th:text="'Kokosové ostrovy'"></option>
+            <option th:value="'Kolumbie'" th:text="'Kolumbie'"></option>
+            <option th:value="'Komory'" th:text="'Komory'"></option>
+            <option th:value="'Konžská demokratická republika'" th:text="'Konžská demokratická republika'"></option>
+            <option th:value="'Konžská republika'" th:text="'Konžská republika'"></option>
+            <option th:value="'Kosovo'" th:text="'Kosovo'"></option>
+            <option th:value="'Kostarika'" th:text="'Kostarika'"></option>
+            <option th:value="'Kuba'" th:text="'Kuba'"></option>
+            <option th:value="'Kuvajt'" th:text="'Kuvajt'"></option>
+            <option th:value="'Kypr'" th:text="'Kypr'"></option>
+            <option th:value="'Kyrgyzstán'" th:text="'Kyrgyzstán'"></option>
+            <option th:value="'Laos'" th:text="'Laos'"></option>
+            <option th:value="'Lesotho'" th:text="'Lesotho'"></option>
+            <option th:value="'Libanon'" th:text="'Libanon'"></option>
+            <option th:value="'Libérie'" th:text="'Libérie'"></option>
+            <option th:value="'Libye'" th:text="'Libye'"></option>
+            <option th:value="'Lichtenštejnsko'" th:text="'Lichtenštejnsko'"></option>
+            <option th:value="'Litva'" th:text="'Litva'"></option>
+            <option th:value="'Lotyšsko'" th:text="'Lotyšsko'"></option>
+            <option th:value="'Lucembursko'" th:text="'Lucembursko'"></option>
+            <option th:value="'Macao'" th:text="'Macao'"></option>
+            <option th:value="'Madagaskar'" th:text="'Madagaskar'"></option>
+            <option th:value="'Maďarsko'" th:text="'Maďarsko'"></option>
+            <option th:value="'Malajsie'" th:text="'Malajsie'"></option>
+            <option th:value="'Malawi'" th:text="'Malawi'"></option>
+            <option th:value="'Maledivy'" th:text="'Maledivy'"></option>
+            <option th:value="'Mali'" th:text="'Mali'"></option>
+            <option th:value="'Malta'" th:text="'Malta'"></option>
+            <option th:value="'Man'" th:text="'Man'"></option>
+            <option th:value="'Maroko'" th:text="'Maroko'"></option>
+            <option th:value="'Marshallovy ostrovy'" th:text="'Marshallovy ostrovy'"></option>
+            <option th:value="'Martinik'" th:text="'Martinik'"></option>
+            <option th:value="'Mauricius'" th:text="'Mauricius'"></option>
+            <option th:value="'Mauritánie'" th:text="'Mauritánie'"></option>
+            <option th:value="'Mayotte'" th:text="'Mayotte'"></option>
+            <option th:value="'Mexiko'" th:text="'Mexiko'"></option>
+            <option th:value="'Mikronésie'" th:text="'Mikronésie'"></option>
+            <option th:value="'Moldavsko'" th:text="'Moldavsko'"></option>
+            <option th:value="'Monako'" th:text="'Monako'"></option>
+            <option th:value="'Mongolsko'" th:text="'Mongolsko'"></option>
+            <option th:value="'Montserrat'" th:text="'Montserrat'"></option>
+            <option th:value="'Mosambik'" th:text="'Mosambik'"></option>
+            <option th:value="'Myanmar'" th:text="'Myanmar'"></option>
+            <option th:value="'Namibie'" th:text="'Namibie'"></option>
+            <option th:value="'Nauru'" th:text="'Nauru'"></option>
+            <option th:value="'Německo'" th:text="'Německo'"></option>
+            <option th:value="'Nepál'" th:text="'Nepál'"></option>
+            <option th:value="'Niger'" th:text="'Niger'"></option>
+            <option th:value="'Nigérie'" th:text="'Nigérie'"></option>
+            <option th:value="'Nikaragua'" th:text="'Nikaragua'"></option>
+            <option th:value="'Niue'" th:text="'Niue'"></option>
+            <option th:value="'Nizozemsko'" th:text="'Nizozemsko'"></option>
+            <option th:value="'Norfolk'" th:text="'Norfolk'"></option>
+            <option th:value="'Norsko'" th:text="'Norsko'"></option>
+            <option th:value="'Nová Kaledonie'" th:text="'Nová Kaledonie'"></option>
+            <option th:value="'Nový Zéland'" th:text="'Nový Zéland'"></option>
+            <option th:value="'Omán'" th:text="'Omán'"></option>
+            <option th:value="'Pákistán'" th:text="'Pákistán'"></option>
+            <option th:value="'Palau'" th:text="'Palau'"></option>
+            <option th:value="'Palestinská autonomie'" th:text="'Palestinská autonomie'"></option>
+            <option th:value="'Panama'" th:text="'Panama'"></option>
+            <option th:value="'Papua Nová Guinea'" th:text="'Papua Nová Guinea'"></option>
+            <option th:value="'Paraguay'" th:text="'Paraguay'"></option>
+            <option th:value="'Peru'" th:text="'Peru'"></option>
+            <option th:value="'Pitcairnovy ostrovy'" th:text="'Pitcairnovy ostrovy'"></option>
+            <option th:value="'Pobřeží slonoviny'" th:text="'Pobřeží slonoviny'"></option>
+            <option th:value="'Polsko'" th:text="'Polsko'"></option>
+            <option th:value="'Portoriko'" th:text="'Portoriko'"></option>
+            <option th:value="'Portugalsko'" th:text="'Portugalsko'"></option>
+            <option th:value="'Rakousko'" th:text="'Rakousko'"></option>
+            <option th:value="'Réunion'" th:text="'Réunion'"></option>
+            <option th:value="'Rovníková Guinea'" th:text="'Rovníková Guinea'"></option>
+            <option th:value="'Rumunsko'" th:text="'Rumunsko'"></option>
+            <option th:value="'Rusko'" th:text="'Rusko'"></option>
+            <option th:value="'Rwanda'" th:text="'Rwanda'"></option>
+            <option th:value="'Řecko'" th:text="'Řecko'"></option>
+            <option th:value="'Saint Pierre a Miquelon'" th:text="'Saint Pierre a Miquelon'"></option>
+            <option th:value="'Salvador'" th:text="'Salvador'"></option>
+            <option th:value="'Samoa'" th:text="'Samoa'"></option>
+            <option th:value="'San Marino'" th:text="'San Marino'"></option>
+            <option th:value="'Saúdská Arábie'" th:text="'Saúdská Arábie'"></option>
+            <option th:value="'Senegal'" th:text="'Senegal'"></option>
+            <option th:value="'Severní Korea'" th:text="'Severní Korea'"></option>
+            <option th:value="'Severní Makedonie'" th:text="'Severní Makedonie'"></option>
+            <option th:value="'Severní Mariany'" th:text="'Severní Mariany'"></option>
+            <option th:value="'Seychely'" th:text="'Seychely'"></option>
+            <option th:value="'Sierra Leone'" th:text="'Sierra Leone'"></option>
+            <option th:value="'Singapur'" th:text="'Singapur'"></option>
+            <option th:value="'Slovensko'" th:text="'Slovensko'"></option>
+            <option th:value="'Slovinsko'" th:text="'Slovinsko'"></option>
+            <option th:value="'Somálsko'" th:text="'Somálsko'"></option>
+            <option th:value="'Spojené arabské emiráty'" th:text="'Spojené arabské emiráty'"></option>
+            <option th:value="'Spojené království'" th:text="'Spojené království'"></option>
+            <option th:value="'Spojené státy americké'" th:text="'Spojené státy americké'"></option>
+            <option th:value="'Srbsko'" th:text="'Srbsko'"></option>
+            <option th:value="'Srí Lanka'" th:text="'Srí Lanka'"></option>
+            <option th:value="'Středoafrická republika'" th:text="'Středoafrická republika'"></option>
+            <option th:value="'Súdán'" th:text="'Súdán'"></option>
+            <option th:value="'Surinam'" th:text="'Surinam'"></option>
+            <option th:value="'Svatá Helena, Ascension a Tristan da Cunha'" th:text="'Svatá Helena, Ascension a Tristan da Cunha'"></option>
+            <option th:value="'Svatá Lucie'" th:text="'Svatá Lucie'"></option>
+            <option th:value="'Svatý Bartoloměj'" th:text="'Svatý Bartoloměj'"></option>
+            <option th:value="'Svatý Kryštof a Nevis'" th:text="'Svatý Kryštof a Nevis'"></option>
+            <option th:value="'Svatý Martin'" th:text="'Svatý Martin'"></option>
+            <option th:value="'Svatý Tomáš a Princův ostrov'" th:text="'Svatý Tomáš a Princův ostrov'"></option>
+            <option th:value="'Svatý Vincenc a Grenadiny'" th:text="'Svatý Vincenc a Grenadiny'"></option>
+            <option th:value="'Svazijsko'" th:text="'Svazijsko'"></option>
+            <option th:value="'Sýrie'" th:text="'Sýrie'"></option>
+            <option th:value="'Šalomounovy ostrovy'" th:text="'Šalomounovy ostrovy'"></option>
+            <option th:value="'Španělsko'" th:text="'Španělsko'"></option>
+            <option th:value="'Špicberky a Jan Mayen'" th:text="'Špicberky a Jan Mayen'"></option>
+            <option th:value="'Švédsko'" th:text="'Švédsko'"></option>
+            <option th:value="'Švýcarsko'" th:text="'Švýcarsko'"></option>
+            <option th:value="'Tádžikistán'" th:text="'Tádžikistán'"></option>
+            <option th:value="'Tanzanie'" th:text="'Tanzanie'"></option>
+            <option th:value="'Thajsko'" th:text="'Thajsko'"></option>
+            <option th:value="'Tchaj-wan'" th:text="'Tchaj-wan'"></option>
+            <option th:value="'Togo'" th:text="'Togo'"></option>
+            <option th:value="'Tokelau'" th:text="'Tokelau'"></option>
+            <option th:value="'Tonga'" th:text="'Tonga'"></option>
+            <option th:value="'Trinidad a Tobago'" th:text="'Trinidad a Tobago'"></option>
+            <option th:value="'Tunisko'" th:text="'Tunisko'"></option>
+            <option th:value="'Turecko'" th:text="'Turecko'"></option>
+            <option th:value="'Turkmenistán'" th:text="'Turkmenistán'"></option>
+            <option th:value="'Turks a Caicos'" th:text="'Turks a Caicos'"></option>
+            <option th:value="'Tuvalu'" th:text="'Tuvalu'"></option>
+            <option th:value="'Uganda'" th:text="'Uganda'"></option>
+            <option th:value="'Ukrajina'" th:text="'Ukrajina'"></option>
+            <option th:value="'Uruguay'" th:text="'Uruguay'"></option>
+            <option th:value="'Uzbekistán'" th:text="'Uzbekistán'"></option>
+            <option th:value="'Vánoční ostrov'" th:text="'Vánoční ostrov'"></option>
+            <option th:value="'Vanuatu'" th:text="'Vanuatu'"></option>
+            <option th:value="'Vatikán'" th:text="'Vatikán'"></option>
+            <option th:value="'Venezuela'" th:text="'Venezuela'"></option>
+            <option th:value="'Vietnam'" th:text="'Vietnam'"></option>
+            <option th:value="'Východní Timor'" th:text="'Východní Timor'"></option>
+            <option th:value="'Wallis a Futuna'" th:text="'Wallis a Futuna'"></option>
+            <option th:value="'Zambie'" th:text="'Zambie'"></option>
+            <option th:value="'Západní Sahara'" th:text="'Západní Sahara'"></option>
+            <option th:value="'Zimbabwe'" th:text="'Zimbabwe'"></option>
+        </select></div>
+        <input type="hidden" th:field="${place.location}"/>
+        <input type="hidden" th:field="${place.events}"/>
+        <input type="hidden" th:field="${place.users}"/>
+        <div><label>Zeměpisná šířka:</label><input type="number" min="0" max="90" step="0.0000001" th:value="${coordinate.latDeg}" name="latDeg"/></div>
+        <div><label>Směr:</label>
+        <select name="latDir">
+            <option th:each="latDir : ${T(com.project.scheduler.entity.LatitudeDirection).values()}"
+                    th:value="${latDir}" th:text="${latDir.displayValue}"></option>
+        </select></div>
+        <div><label>Zeměpisná délka:</label><input type="number" min="0" max="180" step="0.0000001" th:value="${coordinate.longDeg}" name="longDeg"/></div>
+        <div><label>Směr:</label>
+        <select name="longDir">
+            <option th:each="longDir : ${T(com.project.scheduler.entity.LongitudeDirection).values()}"
+                    th:value="${longDir}" th:text="${longDir.displayValue}"></option>
+        </select></div>
+        <div><input type="submit" value="Upravit"/></div>
+    </form>
+    <div>Pole označená * jsou povinná.</div>
+    <div th:if = "${param.error}">
+        Vyplňte všechna pole správně.
+    </div>
+    <div th:if = "${#request.getParameter('edited')} == 1">
+        Místo upraveno.
+    </div>
+<!-- End of PAGE CONTENT -->
+</div>
+<div th:replace="fragments.html :: footer"></div>
+<script th:replace="fragments.html :: script"></script>
+</body>
+</html>

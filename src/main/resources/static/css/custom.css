@@ -10,4 +10,5 @@ body {font-size:16px;}
 .button-close-menu {width:100%;font-size:22px}
 label {display:inline-block;width:200px;height:40px}
 .fl {float:left;overflow:auto;padding-right:40px;}
-.fclear {clear:both;overflow:auto}
+.fclear {clear:both;overflow:auto;margin-bottom:40px;}
+input {width:380px;}

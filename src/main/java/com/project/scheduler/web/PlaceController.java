@@ -46,6 +46,21 @@ public class PlaceController {
         return "redirect:/add-place/" + eventId + "?added=" + place.getName();
     }
 
+    @RequestMapping("/edit-place/{id}")
+    public String editPlace(@PathVariable long id, Model model){
+        Place p = service.findById(id).get();
+        model.addAttribute("place", p);
+        model.addAttribute("coordinate", coordinateService.findById(p.getLocation().getId()).get());
+        return "edit-place";
+    }
+
+    @PostMapping("/edit-place/{id}")
+    public String editPlaceSubmit(@PathVariable long id, @ModelAttribute Place place, @ModelAttribute GpsCoordinate coordinate) {
+        service.save(place);
+        coordinateService.save(coordinate);
+        return "redirect:/edit-place/" + id + "?edited=1";
+    }
+
     @RequestMapping(value = "/remove-place/{placeId}", method = RequestMethod.GET)
     public String removePlace(@PathVariable long placeId) {
         service.delete(placeId);
