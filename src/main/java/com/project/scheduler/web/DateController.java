@@ -2,8 +2,10 @@ package com.project.scheduler.web;
 
 import com.project.scheduler.entity.Date;
 import com.project.scheduler.entity.Event;
+import com.project.scheduler.entity.User;
 import com.project.scheduler.services.DateService;
 import com.project.scheduler.services.EventService;
+import com.project.scheduler.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +17,12 @@ public class DateController {
 
     private final DateService service;
     private final EventService eventService;
+    private final UserService userService;
 
-    public DateController(DateService service, EventService eventService) {
+    public DateController(DateService service, EventService eventService, UserService userService) {
         this.service = service;
         this.eventService = eventService;
+        this.userService = userService;
     }
 
     @RequestMapping("/add-date/{eventId}")
@@ -41,6 +45,26 @@ public class DateController {
     @RequestMapping(value = "/remove-date/{dateId}", method = RequestMethod.GET)
     public String removeDate(@PathVariable long dateId) {
         service.delete(dateId);
+        return "redirect:/events";
+    }
+
+    @RequestMapping(value = "/enrol-date/{dateId}/{userId}", method = RequestMethod.GET)
+    public String enrolDate(@PathVariable long dateId, @PathVariable long userId) {
+        Date d = service.findById(dateId).get();
+        Set<User> users = d.getUsers();
+        users.add(userService.findById(userId).get());
+        d.setUsers(users);
+        service.save(d);
+        return "redirect:/events";
+    }
+
+    @RequestMapping(value = "/leave-date/{dateId}/{userId}", method = RequestMethod.GET)
+    public String leaveDate(@PathVariable long dateId, @PathVariable long userId) {
+        Date d = service.findById(dateId).get();
+        Set<User> users = d.getUsers();
+        users.remove(userService.findById(userId).get());
+        d.setUsers(users);
+        service.save(d);
         return "redirect:/events";
     }
 }

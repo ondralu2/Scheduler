@@ -29,6 +29,7 @@ public class EventController {
     @GetMapping("/events")
     public String userEvents(Model model, Principal loggedInUser) {
         User user = userService.findByUsername(loggedInUser.getName());
+        model.addAttribute("loggedInUser", user);
         model.addAttribute("events", user.getEvents());
         return "events";
     }

@@ -33,6 +33,9 @@
             <table>
                 <tr th:each="date : ${event.dates}">
                     <td th:text="${date.name}"></td>
+                    <td th:text="${#lists.size(date.users)}"></td>
+                    <td><a th:href="@{/enrol-date/{id}/{userId}(id=${date.id},userId=${loggedInUser.id})}"><img src="graphics/icon-true.png" alt="ikona pravda"></a></td>
+                    <td><a th:href="@{/leave-date/{id}/{userId}(id=${date.id},userId=${loggedInUser.id})}"><img src="graphics/icon-false.png" alt="ikona nepravda"></a></td>
                     <td><a th:href="@{/edit-date/{id}(id=${date.id})}"><img src="graphics/icon-pencil.png" alt="ikona tužka"></a></td>
                     <td><a th:href="@{/remove-date/{id}(id=${date.id})}"><img src="graphics/icon-minus.png" alt="ikona mínus"></a></td>
                 </tr>
@@ -44,6 +47,9 @@
             <table>
                 <tr th:each="place : ${event.places}">
                     <td th:text="${place.name}"></td>
+                    <td th:text="${#lists.size(place.users)}"></td>
+                    <td><a th:href="@{/enrol-place/{id}/{userId}(id=${place.id},userId=${loggedInUser.id})}"><img src="graphics/icon-true.png" alt="ikona pravda"></a></td>
+                    <td><a th:href="@{/leave-place/{id}/{userId}(id=${place.id},userId=${loggedInUser.id})}"><img src="graphics/icon-false.png" alt="ikona nepravda"></a></td>
                     <td><a th:href="@{/edit-place/{id}(id=${place.id})}"><img src="graphics/icon-pencil.png" alt="ikona tužka"></a></td>
                     <td><a th:href="@{/remove-place/{id}(id=${place.id})}"><img src="graphics/icon-minus.png" alt="ikona mínus"></a></td>
                 </tr>
