@@ -15,7 +15,7 @@
     <form th:action = "@{/login}" method = "post">
         <div><label>Uživatelské jméno: </label><input type="text" name="username"/></div>
         <div><label>Heslo: </label><input type="password" name="password"/></div>
-        <div><input type="submit" value="Přihlásit se"/></div>
+        <div><input type="submit" value="Přihlásit se" class="w3-btn"/></div>
     </form>
     <div th:if = "${param.error}">
         Špatné heslo nebo uživatelské jméno.

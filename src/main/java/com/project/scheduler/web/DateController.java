@@ -54,13 +54,13 @@ public class DateController {
         return "redirect:/edit-date/" + id + "?edited=1";
     }
 
-    @RequestMapping(value = "/remove-date/{dateId}", method = RequestMethod.GET)
+    @GetMapping("/remove-date/{dateId}")
     public String removeDate(@PathVariable long dateId) {
         service.delete(dateId);
         return "redirect:/events";
     }
 
-    @RequestMapping(value = "/enrol-date/{dateId}/{userId}", method = RequestMethod.GET)
+    @GetMapping("/enrol-date/{dateId}/{userId}")
     public String enrolDate(@PathVariable long dateId, @PathVariable long userId) {
         Date d = service.findById(dateId).get();
         Set<User> users = d.getUsers();
@@ -70,7 +70,7 @@ public class DateController {
         return "redirect:/events";
     }
 
-    @RequestMapping(value = "/leave-date/{dateId}/{userId}", method = RequestMethod.GET)
+    @GetMapping("/leave-date/{dateId}/{userId}")
     public String leaveDate(@PathVariable long dateId, @PathVariable long userId) {
         Date d = service.findById(dateId).get();
         Set<User> users = d.getUsers();

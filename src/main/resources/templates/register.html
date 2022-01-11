@@ -19,7 +19,7 @@
         <div><label>Heslo: *</label><input type="password" required="required" pattern="[A-Za-z0-9]+" th:field="*{password}"/></div>
         <div><label>E-mail: *</label><input type="email" required="required" pattern=".+@.+\..+" th:field="*{email}"/></div>
         <div><label>Telefon: </label><input type="tel" th:field="*{phone}"/></div>
-        <div><input type="submit" value="Zaregistrovat se"/></div>
+        <div><input type="submit" value="Zaregistrovat se" class="w3-btn"/></div>
     </form>
     <div>Pole označená * jsou povinná.</div>
     <div th:if = "${param.error}">

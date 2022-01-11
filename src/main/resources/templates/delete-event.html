@@ -12,8 +12,9 @@
 <!-- PAGE CONTENT -->
 <div class="w3-main main-margin">
     <h2>Opravdu chcete odstranit událost <span th:value="${event.name}"></span>?</h2>
-    <a th:href="@{/delete-event-confirm/{id}(id=${event.id})}" class="btn btn-success">Ano, smazat.</a>
-    <a th:href="@{/events}" class="btn btn-success">Ne, nemazat.</a>
+    <p class="bold">Tato operace je nevratná.</p>
+    <a th:href="@{/delete-event-confirm/{id}(id=${event.id})}" class="w3-btn">Ano, smazat</a>
+    <a th:href="@{/events}" class="w3-btn">Ne, nemazat</a>
 <!-- End of PAGE CONTENT -->
 </div>
 <div th:replace="fragments.html :: footer"></div>

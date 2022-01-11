@@ -280,7 +280,7 @@
             <option th:each="longDir : ${T(com.project.scheduler.entity.LongitudeDirection).values()}"
                     th:value="${longDir}" th:text="${longDir.displayValue}"></option>
         </select></div>
-        <div><input type="submit" value="Upravit"/></div>
+        <div><input type="submit" value="Upravit" class="w3-btn"/></div>
     </form>
     <div>Pole označená * jsou povinná.</div>
     <div th:if = "${param.error}">

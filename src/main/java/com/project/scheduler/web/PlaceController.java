@@ -61,13 +61,13 @@ public class PlaceController {
         return "redirect:/edit-place/" + id + "?edited=1";
     }
 
-    @RequestMapping(value = "/remove-place/{placeId}", method = RequestMethod.GET)
+    @GetMapping("/remove-place/{placeId}")
     public String removePlace(@PathVariable long placeId) {
         service.delete(placeId);
         return "redirect:/events";
     }
 
-    @RequestMapping(value = "/enrol-place/{placeId}/{userId}", method = RequestMethod.GET)
+    @GetMapping("/enrol-place/{placeId}/{userId}")
     public String enrolDate(@PathVariable long placeId, @PathVariable long userId) {
         Place p = service.findById(placeId).get();
         Set<User> users = p.getUsers();
@@ -77,7 +77,7 @@ public class PlaceController {
         return "redirect:/events";
     }
 
-    @RequestMapping(value = "/leave-place/{placeId}/{userId}", method = RequestMethod.GET)
+    @GetMapping("/leave-place/{placeId}/{userId}")
     public String leaveDate(@PathVariable long placeId, @PathVariable long userId) {
         Place p = service.findById(placeId).get();
         Set<User> users = p.getUsers();

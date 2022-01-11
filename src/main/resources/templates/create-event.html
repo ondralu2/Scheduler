@@ -15,7 +15,7 @@
     <form th:action = "@{/create-event}" th:object="${event}" method = "post">
         <div><label>Název: *</label><input type="text" required="required" pattern=".{5,}" th:field="*{name}"/></div>
         <div><label>Popis: </label><input type="text" th:field="*{description}"/></div>
-        <div><input type="submit" value="Vytvořit událost"/></div>
+        <div><input type="submit" value="Vytvořit událost" class="w3-btn"/></div>
     </form>
     <div>Pole označená * jsou povinná.</div>
     <div th:if = "${param.error}">

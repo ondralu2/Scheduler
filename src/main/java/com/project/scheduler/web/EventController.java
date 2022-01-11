@@ -60,15 +60,15 @@ public class EventController {
         return "redirect:/edit-event/" + id + "?edited=1";
     }
 
-    @RequestMapping(value = "/delete-event/{id}")
-    public String removeEvent(@PathVariable long id, Model model) {
+    @RequestMapping("/delete-event/{id}")
+    public String deleteEvent(@PathVariable long id, Model model) {
         model.addAttribute("event", service.findById(id).get());
         return "delete-event";
     }
 
-    @RequestMapping(value = "/delete-event-confirm/{id}", method = RequestMethod.GET)
-    public String removeEventConfirm(@PathVariable long id) {
+    @GetMapping("/delete-event-confirm/{id}")
+    public String deleteEventConfirm(@PathVariable long id) {
         service.delete(id);
-        return "redirect:/events";
+        return "events";
     }
 }

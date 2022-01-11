@@ -16,7 +16,7 @@
         <div><label>Název termínu: *</label><input type="text" required="required" pattern=".{5,}" th:field="*{name}"/></div>
         <div><label>Začátek: </label><input type="datetime-local" th:field="*{dateFrom}"/></div>
         <div><label>Konec: </label><input type="datetime-local" th:field="*{dateTo}"/></div>
-        <div><input type="submit" value="Přidat"/></div>
+        <div><input type="submit" value="Přidat" class="w3-btn"/></div>
     </form>
     <div>Pole označená * jsou povinná.</div>
     <div th:if = "${param.error}">

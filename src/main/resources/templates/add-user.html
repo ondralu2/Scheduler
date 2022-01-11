@@ -14,7 +14,7 @@
     <h2>Přidání uživatele k události.</h2>
     <form th:action = "@{__${#httpServletRequest.requestURI}__}" method = "post">
         <div><label>Uživatelské jméno: </label><input type="text" required="required" pattern="[A-Za-z0-9]+" th:value="${username}" name="username"/></div>
-        <div><input type="submit" value="Přidat"/></div>
+        <div><input type="submit" value="Přidat" class="w3-btn"/></div>
     </form>
     <div style="visibility:hidden">Je možné přidat jednoho uživatele nebo více uživatelů oddělených středníkem.</div>
     <div th:if = "${param.error}">
