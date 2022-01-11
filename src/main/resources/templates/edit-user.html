@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:replace="fragments.html :: css-primary">
+    <link th:replace="fragments.html :: css-secondary">
+    <link th:replace="fragments.html :: font">
+    <title>Naplánujte si setkání</title>
+</head>
+<body>
+<div th:replace="fragments.html :: header"></div>
+<!-- PAGE CONTENT -->
+<div class="w3-main main-margin">
+    <h2>Registrace.</h2>
+    <form th:action = "@{__${#httpServletRequest.requestURI}__}" th:object="${user}" method = "post">
+        <div><label>Křestní jméno: </label><input type="text" th:field="*{firstName}"/></div>
+        <div><label>Příjmení: </label><input type="text" th:field="*{lastName}"/></div>
+        <div><label>Uživatelské jméno: *</label><input type="text" required="required" pattern="[A-Za-z0-9]+" th:field="*{username}"/></div>
+        <div><label>Heslo: *</label><input type="password" required="required" pattern="[A-Za-z0-9]+" th:field="*{password}"/></div>
+        <div><label>E-mail: *</label><input type="email" required="required" pattern=".+@.+\..+" th:field="*{email}"/></div>
+        <div><label>Telefon: </label><input type="tel" th:field="*{phone}"/></div>
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{authorEvents}"/>
+        <input type="hidden" th:field="*{events}"/>
+        <input type="hidden" th:field="*{dates}"/>
+        <input type="hidden" th:field="*{places}"/>
+        <div><input type="submit" value="Uložit" class="w3-btn"/></div>
+    </form>
+    <div>Pole označená * jsou povinná.</div>
+    <div th:if = "${param.error}">
+        Vyplňte všechna pole správně.
+    </div>
+    <div th:if = "${#request.getParameter('edited')} == 1">
+        Uživatelské údaje upraveny.
+    </div>
+<!-- End of PAGE CONTENT -->
+</div>
+<div th:replace="fragments.html :: footer"></div>
+<script th:replace="fragments.html :: script"></script>
+</body>
+</html>

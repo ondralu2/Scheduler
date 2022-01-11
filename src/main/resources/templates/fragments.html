@@ -16,6 +16,7 @@
         <div class="w3-bar-block">
             <a href="/create-event" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" th:if="${#httpServletRequest.remoteUser != null}">Vytvořit novou událost.</a>
             <a href="/events" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" th:if="${#httpServletRequest.remoteUser != null}">Moje události.</a>
+            <a href="/profile" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" th:if="${#httpServletRequest.remoteUser != null}">Můj profil.</a>
             <a href="/register" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" th:if="${#httpServletRequest.remoteUser == null}">Registrace.</a>
             <a href="/welcome" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" th:if="${#httpServletRequest.remoteUser == null}">Přihlášení.</a>
             <form th:action="@{/logout}" method="post" onclick="w3_close()" th:if="${#httpServletRequest.remoteUser != null}">

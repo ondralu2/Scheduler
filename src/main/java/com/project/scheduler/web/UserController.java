@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -47,25 +46,43 @@ public class UserController {
         return "registered";
     }
 
-    @GetMapping("/user/{id}")
-    public Optional<User> getUser(@PathVariable long id) {
-        // get User from DB (via application logic) and return it in JSON
-        return service.findById(id);
+    @GetMapping("/profile")
+    public String profile(Model model, Principal loggedInUser){
+        model.addAttribute("user", service.findByUsername(loggedInUser.getName()));
+        return "profile";
     }
 
-    @GetMapping("/users")
-    public String users(Model model) {
-        model.addAttribute("users", service.findAll());
-        return "users";
+    @RequestMapping("/edit-user")
+    public String editUser(Model model, Principal loggedInUser){
+        model.addAttribute("user", service.findByUsername(loggedInUser.getName()));
+        return "edit-user";
+    }
+
+    @PostMapping("/edit-user")
+    public String editUserSubmit(@ModelAttribute User user) {
+        service.save(user);
+        return "redirect:/edit-user?edited=1";
+    }
+
+    @RequestMapping("/delete-user")
+    public String deleteUser(Model model, Principal loggedInUser){
+        model.addAttribute("user", service.findByUsername(loggedInUser.getName()));
+        return "delete-user";
+    }
+
+    @GetMapping("/delete-user-confirm")
+    public String deleteUser(Principal loggedInUser) {
+        service.delete(service.findByUsername(loggedInUser.getName()).getId());
+        return "redirect:/logout";
     }
 
     @RequestMapping("/add-user/{eventId}")
-    public String addUser(Model model, @PathVariable long eventId){
+    public String addUser(@PathVariable long eventId){
         return "add-user";
     }
 
     @PostMapping("/add-user/{eventId}")
-    public String addUserSubmit(@RequestParam String username, Model model, @PathVariable long eventId) {
+    public String addUserSubmit(@RequestParam String username, @PathVariable long eventId) {
         Event e = eventService.findById(eventId).get();
         User u = service.findByUsername(username);
         if (u == null)
@@ -77,7 +94,7 @@ public class UserController {
         return "redirect:/add-user/" + eventId + "?added=" + service.findByUsername(username).getUsername();
     }
 
-    @RequestMapping(value = "/remove-user/{eventId}/{userId}", method = RequestMethod.GET)
+    @GetMapping("/remove-user/{eventId}/{userId}")
     public String removeUser(@PathVariable long eventId, @PathVariable long userId) {
         Event e =  eventService.findById(eventId).get();
         Set<User> users = e.getUsers();
