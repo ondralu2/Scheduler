@@ -28,6 +28,7 @@ public class EventController {
         User user = userService.findByUsername(loggedInUser.getName());
         model.addAttribute("loggedInUser", user);
         model.addAttribute("events", user.getEvents());
+        model.addAttribute("counter", new Counter());
         return "events";
     }
 

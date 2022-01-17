@@ -15,3 +15,6 @@ label {display:inline-block;width:200px;height:40px}
 input {width:380px;}
 input[type=submit] {width:auto;}
 .w3-btn,.w3-button {background-color:#f44336;color:white;}
+.click {cursor:pointer;}
+.hidden {display:none;}
+ul {margin:0px;}
