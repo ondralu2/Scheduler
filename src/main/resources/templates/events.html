@@ -36,7 +36,7 @@
                 <th:block th:each="user : ${event.users}" th:unless="${user.username} == ${event.author.username}">
                     <tr>
                         <td th:text="${user.username}" class="click" th:onclick="'javascript:show_hide('+${counter.getAndIncCount()}+')'"></td>
-                        <td th:if="${loggedInUser} == ${event.author}">
+                        <td th:if="${loggedInUser} == ${event.author} and ${event.winningDate} == null and ${event.winningPlace} == null">
                             <a th:href="@{/remove-user/{eventId}/{userId}(eventId=${event.id},userId=${user.id})}"><img src="graphics/icon-bin.png" alt="ikona popelnice"></a>
                         </td>
                     </tr>
@@ -51,7 +51,9 @@
                     </tr>
                 </th:block>
             </table>
-            <a th:href="@{/add-user/{id}(id=${event.id})}" th:if="${loggedInUser} == ${event.author}"><img src="graphics/icon-plus.png" alt="ikona plus"></a>
+            <a th:href="@{/add-user/{id}(id=${event.id})}" th:if="${loggedInUser} == ${event.author} and ${event.winningDate} == null and ${event.winningPlace} == null">
+                <img src="graphics/icon-plus.png" alt="ikona plus">
+            </a>
         </div>
         <div class="fl">
             <h4>Termíny:</h4>
@@ -60,30 +62,40 @@
                     <tr th:style="${#lists.contains(date.users, loggedInUser)} ? 'font-weight: bold'">
                         <td th:text="${date.name}" class="click" th:onclick="'javascript:show_hide('+${counter.getAndIncCount()}+')'"></td>
                         <td th:text="${#lists.size(date.users)}"></td>
-                        <td th:unless="${#lists.contains(date.users, loggedInUser)}">
+                        <td th:if="${!#lists.contains(date.users, loggedInUser)} and ${event.winningDate} == null">
                             <a th:href="@{/enrol-date/{id}/{userId}(id=${date.id},userId=${loggedInUser.id})}"><img src="graphics/icon-true.png" alt="ikona pravda"></a>
                         </td>
-                        <td th:if="${#lists.contains(date.users, loggedInUser)}">
+                        <td th:if="${#lists.contains(date.users, loggedInUser)} and ${event.winningDate} == null">
                             <a th:href="@{/leave-date/{id}/{userId}(id=${date.id},userId=${loggedInUser.id})}"><img src="graphics/icon-false.png" alt="ikona nepravda"></a>
                         </td>
-                        <td th:if="${loggedInUser} == ${event.author}">
+                        <td th:if="${loggedInUser} == ${event.author} and ${event.winningDate} == null">
                             <a th:href="@{/edit-date/{id}(id=${date.id})}"><img src="graphics/icon-pencil.png" alt="ikona tužka"></a>
                         </td>
-                        <td th:if="${loggedInUser} == ${event.author}">
+                        <td th:if="${loggedInUser} == ${event.author} and ${event.winningDate} == null">
                             <a th:href="@{/remove-date/{id}(id=${date.id})}"><img src="graphics/icon-bin.png" alt="ikona popelnice"></a>
+                        </td>
+                        <td th:if="${event.winningDate} == ${date}">
+                            <img src="graphics/icon-star.png" alt="ikona hvězda">
+                        </td>
+                        <td th:if="${loggedInUser} == ${event.author} and ${event.winningDate} == null">
+                            <a th:href="@{/set-winning-date/{eventId}/{id}(eventId=${event.id},id=${date.id})}"><img src="graphics/icon-cup.png" alt="ikona pohár"></a>
+                        </td>
+                        <td th:if="${loggedInUser} == ${event.author} and ${event.winningDate} == ${date}">
+                            <a th:href="@{/reset-winning-date/{eventId}(eventId=${event.id})}"><img src="graphics/icon-cup-crossedout.png" alt="ikona přeškrnutý pohár"></a>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <ul class="hidden" th:id="${counter.getCount()}">
-                                <li th:text="'Od: ' + ${#strings.defaultString(#temporals.format(date.dateFrom, 'dd.MM.yyyy HH:mm'),'')}"></li>
-                                <li th:text="'Do: ' + ${#strings.defaultString(#temporals.format(date.dateTo, 'dd.MM.yyyy HH:mm'),'')}"></li>
+                                <li th:text="'Od: ' + ${#strings.defaultString(#temporals.format(date.dateFrom, 'd. M. yyyy HH:mm'),'')}"></li>
+                                <li th:text="'Do: ' + ${#strings.defaultString(#temporals.format(date.dateTo, 'd. M. yyyy HH:mm'),'')}"></li>
+                                <li>Přihlášení: <span th:each="user, iterStat : ${date.users}" th:text="!${iterStat.last} ? ${user.username} + ', ' : ${user.username}"></span></li>
                             </ul>
                         </td>
                     </tr>
                 </th:block>
             </table>
-            <a th:href="@{/add-date/{id}(id=${event.id})}" th:if="${loggedInUser} == ${event.author}"><img src="graphics/icon-plus.png" alt="ikona plus"></a>
+            <a th:href="@{/add-date/{id}(id=${event.id})}" th:if="${loggedInUser} == ${event.author} and ${event.winningDate} == null"><img src="graphics/icon-plus.png" alt="ikona plus"></a>
         </div>
         <div class="fl">
             <h4>Místa:</h4>
@@ -92,17 +104,26 @@
                     <tr th:style="${#lists.contains(place.users, loggedInUser)} ? 'font-weight: bold'">
                         <td th:text="${place.name}" class="click" th:onclick="'javascript:show_hide('+${counter.getAndIncCount()}+')'">></td>
                         <td th:text="${#lists.size(place.users)}"></td>
-                        <td th:unless="${#lists.contains(place.users, loggedInUser)}">
+                        <td th:if="${!#lists.contains(place.users, loggedInUser)} and ${event.winningPlace} == null">
                             <a th:href="@{/enrol-place/{id}/{userId}(id=${place.id},userId=${loggedInUser.id})}"><img src="graphics/icon-true.png" alt="ikona pravda"></a>
                         </td>
-                        <td th:if="${#lists.contains(place.users, loggedInUser)}">
+                        <td th:if="${#lists.contains(place.users, loggedInUser)} and ${event.winningPlace} == null">
                             <a th:href="@{/leave-place/{id}/{userId}(id=${place.id},userId=${loggedInUser.id})}"><img src="graphics/icon-false.png" alt="ikona nepravda"></a>
                         </td>
-                        <td th:if="${loggedInUser} == ${event.author}">
+                        <td th:if="${loggedInUser} == ${event.author} and ${event.winningPlace} == null">
                             <a th:href="@{/edit-place/{id}(id=${place.id})}"><img src="graphics/icon-pencil.png" alt="ikona tužka"></a>
                         </td>
-                        <td th:if="${loggedInUser} == ${event.author}">
+                        <td th:if="${loggedInUser} == ${event.author} and ${event.winningPlace} == null">
                             <a th:href="@{/remove-place/{id}(id=${place.id})}"><img src="graphics/icon-bin.png" alt="ikona popelnice"></a>
+                        </td>
+                        <td th:if="${event.winningPlace} == ${place}">
+                            <img src="graphics/icon-star.png" alt="ikona hvězda">
+                        </td>
+                        <td th:if="${loggedInUser} == ${event.author} and ${event.winningPlace} == null">
+                            <a th:href="@{/set-winning-place/{eventId}/{id}(eventId=${event.id},id=${place.id})}"><img src="graphics/icon-cup.png" alt="ikona pohár"></a>
+                        </td>
+                        <td th:if="${loggedInUser} == ${event.author} and ${event.winningPlace} == ${place}">
+                            <a th:href="@{/reset-winning-place/{eventId}(eventId=${event.id})}"><img src="graphics/icon-cup-crossedout.png" alt="ikona přeškrnutý pohár"></a>
                         </td>
                     </tr>
                     <tr>
@@ -118,12 +139,15 @@
                                                   (latDeg=${place.location.latDeg}, latDir=${place.location.latDir}, longDeg=${place.location.longDeg}, longDir=${place.location.longDir})}"
                                        th:text="${place.location.latDeg} + ${place.location.latDir} + ', ' + ${place.location.longDeg} + ${place.location.longDir}" target="_blank"></a>
                                 </li>
+                                <li>
+                                    Přihlášení: <span th:each="user, iterStat : ${place.users}" th:text="!${iterStat.last} ? ${user.username} + ', ' : ${user.username}"></span>
+                                </li>
                             </ul>
                         </td>
                     </tr>
                 </th:block>
             </table>
-            <a th:href="@{/add-place/{id}(id=${event.id})}" th:if="${loggedInUser} == ${event.author}"><img src="graphics/icon-plus.png" alt="ikona plus"></a>
+            <a th:href="@{/add-place/{id}(id=${event.id})}" th:if="${loggedInUser} == ${event.author} and ${event.winningPlace} == null"><img src="graphics/icon-plus.png" alt="ikona plus"></a>
         </div>
     </div>
 <!-- End of PAGE CONTENT -->

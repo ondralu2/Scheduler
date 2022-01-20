@@ -40,6 +40,10 @@ public class Event {
             inverseJoinColumns = @JoinColumn(name = "place_id")
     )
     private Set<Place> places;
+    @OneToOne
+    private Date winningDate;
+    @OneToOne
+    private Place winningPlace;
 
     public long getId() {
         return id;
@@ -95,5 +99,29 @@ public class Event {
 
     public void setPlaces(Set<Place> places) {
         this.places = places;
+    }
+
+    public Date getWinningDate() {
+        return winningDate;
+    }
+
+    public void setWinningDate(Date winningDate) {
+        this.winningDate = winningDate;
+    }
+
+    public void setWinningDate() {
+        this.winningDate = null;
+    }
+
+    public Place getWinningPlace() {
+        return winningPlace;
+    }
+
+    public void setWinningPlace(Place winningPlace) {
+        this.winningPlace = winningPlace;
+    }
+
+    public void setWinningPlace() {
+        this.winningPlace = null;
     }
 }

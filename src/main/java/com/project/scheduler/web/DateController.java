@@ -79,4 +79,20 @@ public class DateController {
         service.save(d);
         return "redirect:/events";
     }
+
+    @GetMapping("/set-winning-date/{eventId}/{dateId}")
+    public String setWinningDate(@PathVariable long eventId, @PathVariable long dateId) {
+        Event e = eventService.findById(eventId).get();
+        e.setWinningDate(service.findById(dateId).get());
+        eventService.save(e);
+        return "redirect:/events";
+    }
+
+    @GetMapping("/reset-winning-date/{eventId}")
+    public String resetWinningDate(@PathVariable long eventId) {
+        Event e = eventService.findById(eventId).get();
+        e.setWinningDate();
+        eventService.save(e);
+        return "redirect:/events";
+    }
 }

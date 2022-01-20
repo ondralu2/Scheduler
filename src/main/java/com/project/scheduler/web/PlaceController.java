@@ -68,7 +68,7 @@ public class PlaceController {
     }
 
     @GetMapping("/enrol-place/{placeId}/{userId}")
-    public String enrolDate(@PathVariable long placeId, @PathVariable long userId) {
+    public String enrolPlace(@PathVariable long placeId, @PathVariable long userId) {
         Place p = service.findById(placeId).get();
         Set<User> users = p.getUsers();
         users.add(userService.findById(userId).get());
@@ -78,12 +78,28 @@ public class PlaceController {
     }
 
     @GetMapping("/leave-place/{placeId}/{userId}")
-    public String leaveDate(@PathVariable long placeId, @PathVariable long userId) {
+    public String leavePlace(@PathVariable long placeId, @PathVariable long userId) {
         Place p = service.findById(placeId).get();
         Set<User> users = p.getUsers();
         users.remove(userService.findById(userId).get());
         p.setUsers(users);
         service.save(p);
+        return "redirect:/events";
+    }
+
+    @GetMapping("/set-winning-place/{eventId}/{placeId}")
+    public String setWinningPlace(@PathVariable long eventId, @PathVariable long placeId) {
+        Event e = eventService.findById(eventId).get();
+        e.setWinningPlace(service.findById(placeId).get());
+        eventService.save(e);
+        return "redirect:/events";
+    }
+
+    @GetMapping("/reset-winning-place/{eventId}")
+    public String resetWinningPlace(@PathVariable long eventId) {
+        Event e = eventService.findById(eventId).get();
+        e.setWinningPlace();
+        eventService.save(e);
         return "redirect:/events";
     }
 }
