@@ -1,20 +1,21 @@
-body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
-body {font-size:16px;}
+body,h1,h2,h3,h4,h5 {font-family:"Poppins",sans-serif}
+body {font-size:16px}
 .bold {font-weight:bold}
 .w3-half img {margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
 .w3-half img:hover {opacity:1}
 .text-decoration-none {text-decoration:none}
 .hr-red {width:50px;border:5px solid red}
-.main-margin {margin-left:340px;margin-right:40px;margin-top:20px;margin-bottom:60px;padding-left:20px;padding-right:16px;}
+.main-margin {margin-left:340px;margin-right:40px;margin-top:20px;margin-bottom:60px;padding-left:20px;padding-right:16px}
 .container-margin {margin-top:80px}
 .sidebar {z-index:3;width:300px;font-weight:bold}
 .button-close-menu {width:100%;font-size:22px}
 label {display:inline-block;width:200px;height:40px}
-.fl {float:left;overflow:auto;padding-right:40px;}
-.fclear {clear:both;overflow:auto;margin-bottom:40px;}
-input {width:380px;}
-input[type=submit] {width:auto;}
-.w3-btn,.w3-button {background-color:#f44336;color:white;}
-.click {cursor:pointer;}
-.hidden {display:none;}
-ul {margin:0px;}
+.fl {float:left;overflow:auto;padding-right:40px}
+.fclear {clear:both;overflow:auto;margin-bottom:40px}
+input {width:380px}
+input[type=submit] {width:auto}
+.w3-btn,.w3-button {background-color:#f44336;color:white}
+.click {cursor:pointer}
+.hidden {display:none}
+ul {margin:0}
+.center {display:block;margin-left:auto;margin-right:auto;width:60%}
