@@ -1,8 +1,7 @@
 package com.project.scheduler.entity;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 @Entity
@@ -11,7 +10,7 @@ public class Event {
     @GeneratedValue
     @Column
     private long id;
-    @NotNull
+    @NotEmpty
     @Column
     private String name;
     @Column

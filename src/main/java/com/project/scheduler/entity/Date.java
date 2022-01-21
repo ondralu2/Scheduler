@@ -1,9 +1,9 @@
 package com.project.scheduler.entity;
 
-import com.sun.istack.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -13,7 +13,7 @@ public class Date {
     @Id
     @GeneratedValue
     private long id;
-    @NotNull
+    @NotEmpty
     private String name;
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime dateFrom;

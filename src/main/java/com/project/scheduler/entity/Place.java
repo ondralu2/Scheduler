@@ -1,8 +1,7 @@
 package com.project.scheduler.entity;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 @Entity
@@ -10,7 +9,7 @@ public class Place {
     @Id
     @GeneratedValue
     private long id;
-    @NotNull
+    @NotEmpty
     private String name;
     private String street;
     @Column(name = "street_number")

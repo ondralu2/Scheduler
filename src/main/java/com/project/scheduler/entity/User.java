@@ -1,10 +1,10 @@
 package com.project.scheduler.entity;
 
-import com.sun.istack.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
 import java.util.Set;
 
@@ -19,13 +19,13 @@ public class User implements UserDetails {
     private String firstName;
     @Column
     private String lastName;
-    @NotNull
+    @NotEmpty
     @Column
     private String username;
-    @NotNull
+    @NotEmpty
     @Column
     private String password;
-    @NotNull
+    @NotEmpty
     @Column
     private String email;
     @Column
