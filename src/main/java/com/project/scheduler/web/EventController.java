@@ -72,4 +72,33 @@ public class EventController {
         service.delete(id);
         return "events";
     }
+
+
+    @RequestMapping("/add-user/{eventId}")
+    public String addUser(@PathVariable long eventId){
+        return "add-user";
+    }
+
+    @PostMapping("/add-user/{eventId}")
+    public String addUserSubmit(@RequestParam String username, @PathVariable long eventId) {
+        Event e = service.findById(eventId).get();
+        User u = userService.findByUsername(username);
+        if (u == null)
+            return "redirect:/add-user/" + eventId + "?error";
+        Set<User> users = e.getUsers();
+        users.add(u);
+        e.setUsers(users);
+        service.save(e);
+        return "redirect:/add-user/" + eventId + "?added=" + userService.findByUsername(username).getUsername();
+    }
+
+    @GetMapping("/remove-user/{eventId}/{userId}")
+    public String removeUser(@PathVariable long eventId, @PathVariable long userId) {
+        Event e =  service.findById(eventId).get();
+        Set<User> users = e.getUsers();
+        users.remove(userService.findById(userId).get());
+        e.setUsers(users);
+        service.save(e);
+        return "redirect:/events";
+    }
 }

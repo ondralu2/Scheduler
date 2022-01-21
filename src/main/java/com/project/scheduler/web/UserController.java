@@ -1,25 +1,27 @@
 package com.project.scheduler.web;
 
-import com.project.scheduler.entity.Event;
 import com.project.scheduler.entity.User;
-import com.project.scheduler.services.EventService;
 import com.project.scheduler.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.Set;
+import java.util.List;
 
 @Controller
 public class UserController {
 
     private final UserService service;
-    private final EventService eventService;
 
-    public UserController(UserService service, EventService eventService) {
+    public UserController(UserService service) {
         this.service = service;
-        this.eventService = eventService;
+    }
+
+    @GetMapping("/api/users")
+    @ResponseBody
+    public List<User> getUsers() {
+        return service.findAll();
     }
 
     @RequestMapping("/login")
@@ -74,33 +76,5 @@ public class UserController {
     public String deleteUser(Principal loggedInUser) {
         service.delete(service.findByUsername(loggedInUser.getName()).getId());
         return "redirect:/logout";
-    }
-
-    @RequestMapping("/add-user/{eventId}")
-    public String addUser(@PathVariable long eventId){
-        return "add-user";
-    }
-
-    @PostMapping("/add-user/{eventId}")
-    public String addUserSubmit(@RequestParam String username, @PathVariable long eventId) {
-        Event e = eventService.findById(eventId).get();
-        User u = service.findByUsername(username);
-        if (u == null)
-            return "redirect:/add-user/" + eventId + "?error";
-        Set<User> users = e.getUsers();
-        users.add(u);
-        e.setUsers(users);
-        eventService.save(e);
-        return "redirect:/add-user/" + eventId + "?added=" + service.findByUsername(username).getUsername();
-    }
-
-    @GetMapping("/remove-user/{eventId}/{userId}")
-    public String removeUser(@PathVariable long eventId, @PathVariable long userId) {
-        Event e =  eventService.findById(eventId).get();
-        Set<User> users = e.getUsers();
-        users.remove(service.findById(userId).get());
-        e.setUsers(users);
-        eventService.save(e);
-        return "redirect:/events";
     }
 }
