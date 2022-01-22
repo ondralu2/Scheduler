@@ -18,4 +18,4 @@ input[type=submit] {width:auto}
 .click {cursor:pointer}
 .hidden {display:none}
 ul {margin:0}
-.center {display:block;margin-left:auto;margin-right:auto;width:60%}
+.center {display:block;margin-left:auto;margin-right:auto;text-align:center}
